@@ -19,6 +19,8 @@ dependencies = [
     "fastapi>=0.115.0",
     "uvicorn>=0.30.0",
     "python-multipart>=0.0.9",
+    "httpx>=0.27.0",
+    "sentence-transformers>=3.0.0",
 ]
 
 [project.optional-dependencies]
@@ -39,6 +41,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 
 [tool.ruff.lint.per-file-ignores]
 "notebooks/*.ipynb" = ["E402"]
+"src/web_ui.py" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 
 DEFAULT_DATA_PATH = Path("data/problems_sample.csv")
+REAL_DATA_PATH = Path("data/real_problems.csv")
 
 
 def rating_to_level(rating: float) -> str:
@@ -34,113 +35,156 @@ def clean_text(text: object) -> str:
 
 def generate_problems_sample(
     output_path: Path = DEFAULT_DATA_PATH,
-    n_samples: int = 300,
+    n_samples: int = 600,
     seed: int = 42,
 ) -> pd.DataFrame:
-    """Gera 300 problemas sinteticos (Rating 800-2800) cobrindo 7 faixas reais."""
+    """Gera problemas sinteticos realistas (Rating 800-2800) cobrindo 7 faixas reais."""
     rng = np.random.default_rng(seed)
 
     archetypes = [
         {
-            "rating_range": (800, 900),
+            "rating_range": (800, 950),
             "n_choices": ["1 <= n <= 100", "1 <= a, b <= 1000", "1 <= n <= 10^5"],
             "time_choices": [1.0, 2.0],
             "templates": [
-                "Leia dois inteiros a e b e imprima a soma simples dos dois numeros. {n_str}.",
+                "Leia dois inteiros a e b e imprima a soma simples dos dois números. {n_str}.",
                 "Given two integers a and b, print their sum a + b. Constraints: {n_str}.",
                 "Calcule a soma simples dos elementos de um array e imprima o total. {n_str}.",
-                "Dado um inteiro n, verifique se ele e par ou impar. Limite: {n_str}.",
-                "Leia tres notas, calcule a media simples e imprima o maior valor. {n_str}.",
-                "Dado um array de n inteiros, conte quantos elementos sao pares. {n_str}.",
-                "Verifique se a string informada e um palindromo simples. Limite: {n_str}.",
+                "Dado um inteiro n, verifique se ele é par ou ímpar. Limite: {n_str}.",
+                "Leia três notas, calcule a média simples e imprima o maior valor. {n_str}.",
+                "Dado um array de n inteiros, conte quantos elementos são pares. {n_str}.",
+                "Verifique se a string informada é um palíndromo simples. Limite: {n_str}.",
+                "Conte quantas vogais existem na palavra informada e imprima o resultado. {n_str}.",
+                "Leia a idade de n alunos e imprima a maior e a menor idade. Limite: {n_str}.",
+                "Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.",
             ],
         },
         {
-            "rating_range": (950, 1150),
+            "rating_range": (950, 1200),
             "n_choices": ["1 <= n <= 1000", "1 <= n <= 10^5", "1 <= n <= 2 * 10^5"],
             "time_choices": [1.0, 2.0],
             "templates": [
-                "Ordene o vetor de n inteiros e conte a frequencia de cada valor no mapa. {n_str}.",
+                "Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. {n_str}.",
                 "Use soma de prefixos e dois ponteiros para achar a janela deslizante. {n_str}.",
                 "Simule a fila de atendimento e processe os eventos na ordem de chegada. {n_str}.",
                 "Sort the array and use two pointers to find pairs with target sum. {n_str}.",
+                (
+                    "Use uma pilha (stack) para verificar se a sequência de parênteses "
+                    "está balanceada. {n_str}."
+                ),
+                (
+                    "Dado um vetor de preços, use janela deslizante para achar o maior "
+                    "lucro. {n_str}."
+                ),
+                (
+                    "Agrupe os alunos por pontuação usando dicionário/hash e ordene "
+                    "pelo nome. {n_str}."
+                ),
             ],
         },
         {
-            "rating_range": (1200, 1450),
+            "rating_range": (1200, 1500),
             "n_choices": ["1 <= n <= 10^5", "1 <= n <= 2 * 10^5"],
             "time_choices": [1.0, 2.0],
             "templates": [
                 (
-                    "Dados n intervalos disjuntos na reta, escolha o maximo de intervalos "
+                    "Dados n intervalos disjuntos na reta, escolha o máximo de intervalos "
                     "de forma gulosa. Limite: {n_str}."
                 ),
                 (
                     "Encontre o menor valor x para dividir o vetor em k blocos usando "
-                    "busca binaria na resposta monotona. Limite: {n_str}."
+                    "busca binária na resposta monótona. Limite: {n_str}."
                 ),
                 (
-                    "Ordene a permutacao minimizando o custo de trocas adjacentes com "
-                    "estrategia gulosa. Limite: {n_str}."
+                    "Ordene a permutação minimizando o custo de trocas adjacentes com "
+                    "estratégia gulosa. Limite: {n_str}."
                 ),
-                ("Calcule os numeros primos no intervalo usando crivo e mdc. Limite: {n_str}."),
+                ("Calcule os números primos no intervalo usando crivo e mdc. Limite: {n_str}."),
+                (
+                    "Conte quantas formas existem de alocar tarefas usando busca binária "
+                    "e fila de prioridade (heap). Limite: {n_str}."
+                ),
+                (
+                    "Minimize the maximum distance between stations using binary search "
+                    "on the answer and greedy check. Constraints: {n_str}."
+                ),
             ],
         },
         {
-            "rating_range": (1500, 1750),
+            "rating_range": (1500, 1800),
             "n_choices": ["1 <= n, m <= 10^5", "2 <= n <= 2 * 10^5"],
             "time_choices": [2.0, 2.5],
             "templates": [
                 (
-                    "Dado um grafo conexo com n vertices e m arestas, encontre o menor "
+                    "Dado um grafo conexo com n vértices e m arestas, encontre o menor "
                     "caminho entre 1 e n via BFS ou Dijkstra. Limite: {n_str}."
                 ),
                 (
-                    "Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao "
-                    "topologica valida usando DFS. Limite: {n_str}."
+                    "Verifique se o grafo direcionado possui ciclo e imprima uma ordenação "
+                    "topológica válida usando DFS. Limite: {n_str}."
                 ),
                 (
-                    "Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando "
-                    "programacao dinamica e knapsack. Limite: {n_str}."
+                    "Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando "
+                    "programação dinâmica e knapsack (mochila). Limite: {n_str}."
                 ),
                 (
-                    "Encontre a arvore geradora minima usando Kruskal e union-find dsu "
+                    "Encontre a árvore geradora mínima usando Kruskal e union-find dsu "
                     "no grafo. Limite: {n_str}."
+                ),
+                (
+                    "Dada uma malha de cidades e estradas com pesos, calcule o caminho "
+                    "mínimo com Dijkstra e fila de prioridade. Limite: {n_str}."
+                ),
+                (
+                    "Calcule o número de maneiras distintas de dar o troco para um valor "
+                    "V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: {n_str}."
                 ),
             ],
         },
         {
-            "rating_range": (1800, 2050),
+            "rating_range": (1800, 2100),
             "n_choices": ["1 <= n <= 10^5", "1 <= n <= 2 * 10^5"],
             "time_choices": [2.0, 2.5],
             "templates": [
                 (
-                    "Dada uma arvore enraizada com n vertices, calcule o diametro e o "
-                    "ancestral comum lca para cada subarvore. Limite: {n_str}."
+                    "Dada uma árvore enraizada com n vértices, calcule o diâmetro e o "
+                    "ancestral comum LCA para cada subárvore. Limite: {n_str}."
                 ),
                 (
-                    "Calcule o conjunto independente maximo usando programacao dinamica "
-                    "em arvore enraizada. Limite: {n_str}."
+                    "Calcule o conjunto independente máximo usando programação dinâmica "
+                    "em árvore enraizada. Limite: {n_str}."
                 ),
-                ("Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: {n_str}."),
+                ("Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: {n_str}."),
+                (
+                    "Em uma árvore com n vértices, responda consultas de menor ancestral "
+                    "comum (LCA) usando binary lifting. Limite: {n_str}."
+                ),
+                (
+                    "Dado um grafo ponderado e programação dinâmica sobre subconjuntos, "
+                    "calcule o custo mínimo de conexão. Limite: {n_str}."
+                ),
             ],
         },
         {
-            "rating_range": (2100, 2350),
+            "rating_range": (2100, 2400),
             "n_choices": ["1 <= n, q <= 2 * 10^5", "1 <= n <= 2 * 10^5"],
             "time_choices": [2.0, 3.0],
             "templates": [
                 (
-                    "Responda q consultas e atualizacoes em intervalo usando arvore de "
+                    "Responda q consultas e atualizações em intervalo usando árvore de "
                     "segmentos com lazy propagation. Limite: {n_str}."
                 ),
                 (
                     "Processe q consultas offline em uma matriz grid n por m usando "
-                    "Fenwick tree e arvore de segmentos. Limite: {n_str}."
+                    "Fenwick tree e árvore de segmentos. Limite: {n_str}."
                 ),
                 (
-                    "Dado um grafo com arvore enraizada, responda q consultas em "
-                    "subarvore com programacao dinamica e lazy propagation. {n_str}."
+                    "Dado um grafo com árvore enraizada, responda q consultas em "
+                    "subárvore com programação dinâmica e lazy propagation. {n_str}."
+                ),
+                (
+                    "Mantenha uma segment tree com lazy propagation para atualizar intervalos "
+                    "e consultar o máximo em [l, r]. Limite: {n_str}."
                 ),
             ],
         },
@@ -151,19 +195,23 @@ def generate_problems_sample(
             "templates": [
                 (
                     "Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando "
-                    "bitmask programacao dinamica modulo 998244353. Limite: {n_str}."
+                    "bitmask programação dinâmica módulo 998244353. Limite: {n_str}."
                 ),
                 (
-                    "Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando "
-                    "exponenciacao rapida de matrizes. Limite: {n_str}."
+                    "Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando "
+                    "exponenciação rápida de matrizes. Limite: {n_str}."
                 ),
                 (
-                    "Otimize a programacao dinamica em matriz grid usando convex hull trick "
-                    "e centroid decomposition modulo 998244353. Limite: {n_str}."
+                    "Otimize a programação dinâmica em matriz grid usando convex hull trick "
+                    "e centroid decomposition módulo 998244353. Limite: {n_str}."
                 ),
                 (
-                    "Calcule o fluxo maximo e corte minimo com dinic e heavy-light "
-                    "decomposition hld na arvore. Limite: {n_str}."
+                    "Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light "
+                    "decomposition HLD na árvore. Limite: {n_str}."
+                ),
+                (
+                    "Use FFT/NTT para multiplicar polinômios em árvore com centroid "
+                    "decomposition módulo 998244353. Limite: {n_str}."
                 ),
             ],
         },
@@ -198,11 +246,16 @@ def generate_problems_sample(
 def load_dataset(
     csv_path: Path | None = None,
     generate_if_missing: bool = True,
-    n_samples: int = 300,
+    n_samples: int = 600,
     seed: int = 42,
 ) -> pd.DataFrame:
-    """Carrega e limpa o dataset CSV de problemas."""
-    path = csv_path or DEFAULT_DATA_PATH
+    """Carrega e limpa o dataset CSV de problemas (prioriza real_problems.csv se existir)."""
+    if csv_path is not None:
+        path = csv_path
+    elif REAL_DATA_PATH.exists():
+        path = REAL_DATA_PATH
+    else:
+        path = DEFAULT_DATA_PATH
     if not path.exists():
         if not generate_if_missing:
             raise FileNotFoundError(f"Dataset nao encontrado em {path}")

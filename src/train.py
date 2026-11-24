@@ -186,7 +186,7 @@ def train_and_evaluate(
     artifacts_dir: Path = Path("artifacts"),
     n_splits: int = 5,
     epochs: int = 40,
-    max_tfidf_features: int = 150,
+    max_tfidf_features: int = 400,
     seed: int = 42,
 ) -> TrainSummary:
     """Executa KFold CV comparando XGBoost e PyTorch MLP, gera graficos e salva artefatos."""

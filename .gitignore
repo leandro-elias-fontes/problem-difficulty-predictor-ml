@@ -10,4 +10,5 @@ artifacts/
 *.pkl
 *.joblib
 submission.csv
+data/feedback.jsonl
 .env

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from functools import lru_cache
 from pathlib import Path
 
 import joblib
@@ -11,9 +12,64 @@ import pandas as pd
 import torch
 
 from src.dataset import clean_text, rating_to_level
-from src.features import build_feature_frame
+from src.features import (
+    build_feature_frame,
+    extract_detected_topics,
+    extract_max_n_log10,
+)
+from src.semantic_model import (
+    SEMANTIC_ARTIFACTS_DIR,
+    predict_semantic,
+    rating_to_uberhub_track,
+    semantic_artifacts_available,
+)
 from src.train import RatingMLP, train_and_evaluate
 from src.vision_extract import extract_problems_from_image
+
+
+@lru_cache(maxsize=4)
+def _load_artifacts(artifacts_dir_str: str) -> tuple[object, object, RatingMLP, float, float]:
+    """Carrega e mantem em cache os modelos treinados para inferencia rapida."""
+    artifacts_dir = Path(artifacts_dir_str)
+    xgb_path = artifacts_dir / "xgb_pipeline.joblib"
+    if not xgb_path.exists():
+        train_and_evaluate(artifacts_dir=artifacts_dir)
+
+    xgb_pipe = joblib.load(xgb_path)
+    mlp_prep = joblib.load(artifacts_dir / "mlp_preprocessor.joblib")
+    ckpt = torch.load(artifacts_dir / "mlp_model.pt", map_location="cpu", weights_only=True)
+    model = RatingMLP(input_dim=int(ckpt["input_dim"]))
+    model.load_state_dict(ckpt["state_dict"])
+    model.eval()
+    return xgb_pipe, mlp_prep, model, float(ckpt["y_mean"]), float(ckpt["y_std"])
+
+
+def _format_n_display(log10_val: float) -> str:
+    """Formata log10(N) em notacao legivel para instrutores."""
+    if abs(log10_val - 2.5) < 1e-6:
+        return "Não informado"
+    rounded_exp = round(log10_val)
+    if abs(log10_val - rounded_exp) < 0.08 and rounded_exp >= 3:
+        return f"N ≤ 10^{rounded_exp}"
+    approx = 10**log10_val
+    if approx < 10_000:
+        return f"N ≤ {int(round(approx))}"
+    return f"N ≈ 10^{log10_val:.1f}"
+
+
+def _instructor_guidance(rating: int) -> str:
+    """Retorna orientacao pratica para montagem de listas e provas."""
+    if rating < 1000:
+        return "Questão de aquecimento (A/B). Ideal para primeiras semanas ou início de lista."
+    if rating < 1250:
+        return "Nível Fácil. Boa para fixar lógica básica, vetores e ordenação."
+    if rating < 1600:
+        return "Nível Intermediário. Ótima para meio de lista (C/D) com algoritmos clássicos."
+    if rating < 2000:
+        return "Nível Avançado. Recomendada para final de lista ou seletiva de maratona."
+    if rating < 2400:
+        return "Nível Difícil (Regional ICPC). Ideal como questão desafio da prova."
+    return "Nível Muito Difícil (ICPC Finals). Questão âncora para times experientes."
 
 
 def predict_rating(
@@ -22,11 +78,7 @@ def predict_rating(
     time_limit: float = 2.0,
     artifacts_dir: Path = Path("artifacts"),
 ) -> dict[str, object]:
-    """Estima o Rating usando XGBoost e PyTorch MLP treinados."""
-    xgb_path = artifacts_dir / "xgb_pipeline.joblib"
-    if not xgb_path.exists():
-        train_and_evaluate(artifacts_dir=artifacts_dir)
-
+    """Estima o Rating usando o modelo semantico multilingue (ou fallback TF-IDF)."""
     full_statement = clean_text(statement)
     if n_limit:
         full_statement = f"{full_statement} Limite: n <= {n_limit}."
@@ -34,31 +86,70 @@ def predict_rating(
     row_df = pd.DataFrame([{"statement": full_statement, "time_limit": float(time_limit)}])
     feat_df = build_feature_frame(row_df)
 
-    xgb_pipe = joblib.load(xgb_path)
-    xgb_pred = float(np.clip(xgb_pipe.predict(feat_df)[0], 800.0, 3000.0))
+    # Se o usuario informou um limite explicito de N, prioriza esse valor sobre numeros do texto
+    if n_limit:
+        explicit_log10 = extract_max_n_log10(f"n <= {n_limit}", default_log10=-1.0)
+        if explicit_log10 >= 0.0:
+            idx0 = feat_df.index[0]
+            feat_df.loc[idx0, "max_n_log10"] = explicit_log10
+            has_signal = (
+                feat_df.loc[idx0, "has_counting"] > 0
+                or feat_df.loc[idx0, "has_dp"] > 0
+                or feat_df.loc[idx0, "has_graph"] > 0
+            )
+            feat_df.loc[idx0, "is_small_n_exp"] = float(explicit_log10 <= 1.45 and has_signal)
+            feat_df.loc[idx0, "is_large_n_nlogn"] = float(4.5 <= explicit_log10 <= 6.5)
+            feat_df.loc[idx0, "is_huge_n_log"] = float(explicit_log10 >= 8.5)
 
-    mlp_prep = joblib.load(artifacts_dir / "mlp_preprocessor.joblib")
-    ckpt = torch.load(artifacts_dir / "mlp_model.pt", map_location="cpu", weights_only=True)
-    model = RatingMLP(input_dim=int(ckpt["input_dim"]))
-    model.load_state_dict(ckpt["state_dict"])
-    model.eval()
+    max_n_log10 = round(float(feat_df["max_n_log10"].iloc[0]), 2)
+    n_display = _format_n_display(max_n_log10)
+
+    sem_dir = artifacts_dir / "semantic"
+    if semantic_artifacts_available(sem_dir):
+        sem_res = predict_semantic(full_statement, feat_df, out_dir=sem_dir)
+        return {
+            **sem_res,
+            "max_n_log10": max_n_log10,
+            "n_display": n_display,
+        }
+
+    if artifacts_dir == Path("artifacts") and semantic_artifacts_available(SEMANTIC_ARTIFACTS_DIR):
+        sem_res = predict_semantic(full_statement, feat_df, out_dir=SEMANTIC_ARTIFACTS_DIR)
+        return {
+            **sem_res,
+            "max_n_log10": max_n_log10,
+            "n_display": n_display,
+        }
+
+    xgb_pipe, mlp_prep, model, y_mean, y_std = _load_artifacts(str(artifacts_dir.resolve()))
+    xgb_pred = float(np.clip(xgb_pipe.predict(feat_df)[0], 800.0, 3000.0))
 
     x_mat = mlp_prep.transform(feat_df)
     if hasattr(x_mat, "toarray"):
         x_mat = x_mat.toarray()
     with torch.no_grad():
         raw_mlp = float(model(torch.tensor(x_mat, dtype=torch.float32)).item())
-    mlp_pred = float(np.clip(raw_mlp * float(ckpt["y_std"]) + float(ckpt["y_mean"]), 800.0, 3000.0))
+    mlp_pred = float(np.clip(raw_mlp * y_std + y_mean, 800.0, 3000.0))
 
     avg_pred = 0.5 * (xgb_pred + mlp_pred)
     rounded = int(round(avg_pred / 50.0) * 50)
+    spread = abs(xgb_pred - mlp_pred)
+    confidence = "Alta" if spread <= 120 else ("Média" if spread <= 250 else "Baixa")
+    track_info = rating_to_uberhub_track(rounded)
 
     return {
         "rating": rounded,
         "level": rating_to_level(rounded),
+        "track": track_info["track"],
+        "slot": track_info["slot"],
         "xgb_rating": round(xgb_pred, 1),
         "mlp_rating": round(mlp_pred, 1),
-        "max_n_log10": round(float(feat_df["max_n_log10"].iloc[0]), 2),
+        "max_n_log10": max_n_log10,
+        "n_display": n_display,
+        "topics": extract_detected_topics(feat_df.iloc[0]),
+        "confidence": confidence,
+        "guidance": track_info["guidance"],
+        "similar_problems": [],
     }
 
 

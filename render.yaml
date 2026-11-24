@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: calibrador-questoes-maratona
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true

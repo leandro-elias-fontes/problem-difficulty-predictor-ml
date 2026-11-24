@@ -28,6 +28,7 @@ from src.vision_extract import extract_problems_from_image, split_problems_from_
         ("Restricao: 1 <= n <= 10^{18}", 18.0),
         ("Para n <= 20 vertices", math.log10(20)),
         ("1 <= n <= 10^5 modulo 10^9 + 7", 5.0),
+        ("Limite: 1 <= n <= 10⁵ e até 100.000 consultas", 5.0),
         ("Sem limites numericos", 2.5),
     ],
 )
@@ -37,16 +38,20 @@ def test_extract_max_n_log10(text: str, expected: float) -> None:
 
 
 def test_keyword_flags() -> None:
-    """Valida extracao de flags de grafo, arvore, matriz e modulo."""
+    """Valida extracao de flags com e sem acentos (grafo, arvore, busca binaria, DP)."""
     df = pd.DataFrame(
         [
             {
-                "statement": "Dada uma arvore com n vertices, responda modulo 10^9 + 7.",
+                "statement": "Dada uma árvore com n vértices, responda módulo 10^9 + 7.",
                 "time_limit": 2.5,
             },
             {
-                "statement": "Encontre caminho minimo no grafo em uma matriz grid.",
+                "statement": "Encontre caminho mínimo no grafo em uma matriz grid.",
                 "time_limit": 1.0,
+            },
+            {
+                "statement": "Use busca binária e programação dinâmica na subsequência.",
+                "time_limit": 2.0,
             },
         ]
     )
@@ -56,6 +61,8 @@ def test_keyword_flags() -> None:
     assert feats.loc[0, "has_modulo"] == 1.0
     assert feats.loc[1, "has_graph"] == 1.0
     assert feats.loc[1, "has_matrix"] == 1.0
+    assert feats.loc[2, "has_greedy_bs"] == 1.0
+    assert feats.loc[2, "has_dp"] == 1.0
 
 
 def test_rating_mlp_shape_and_grad() -> None:
@@ -160,7 +167,7 @@ def test_fastapi_web_endpoints(monkeypatch: pytest.MonkeyPatch) -> None:
     resp = client.post(
         "/api/predict-text",
         json={
-            "statement": "Dada uma arvore com n vertices, calcule subarvores.",
+            "statement": "Dada uma árvore com n vértices, calcule subárvores.",
             "n_limit": "10^5",
             "time_limit": 2.0,
         },
@@ -168,6 +175,15 @@ def test_fastapi_web_endpoints(monkeypatch: pytest.MonkeyPatch) -> None:
     assert resp.status_code == 200
     data = resp.json()
     assert 800 <= data["rating"] <= 3000
+    assert "topics" in data and len(data["topics"]) >= 1
+    assert "guidance" in data
+    assert data["confidence"] in {"Alta", "Média", "Baixa"}
+
+    empty_resp = client.post(
+        "/api/predict-image",
+        files={"file": ("vazio.png", b"", "image/png")},
+    )
+    assert empty_resp.status_code == 400
 
     monkeypatch.setattr(
         "src.app.extract_problems_from_image",
@@ -187,3 +203,48 @@ def test_fastapi_web_endpoints(monkeypatch: pytest.MonkeyPatch) -> None:
     img_data = img_resp.json()
     assert img_data["count"] == 1
     assert 800 <= img_data["results"][0]["rating"] <= 3000
+
+    monkeypatch.setattr(
+        "src.app.lookup_problem_by_url",
+        lambda _: {
+            "mode": "official",
+            "source": "Codeforces",
+            "title": "CF 1850E - Cardboard for Pictures",
+            "rating": 1100,
+            "level": "Iniciante",
+            "topics": ["Busca Binária"],
+            "confidence": "Oficial (Codeforces)",
+            "n_display": "Rating oficial",
+            "xgb_rating": 1100.0,
+            "mlp_rating": 1100.0,
+            "max_n_log10": 0.0,
+        },
+    )
+    url_resp = client.post(
+        "/api/predict-url",
+        json={"url": "https://codeforces.com/problemset/problem/1850/E"},
+    )
+    assert url_resp.status_code == 200
+    assert url_resp.json()["rating"] == 1100
+    assert "guidance" in url_resp.json()
+
+    fb_resp = client.post(
+        "/api/feedback",
+        json={"rating": 1500, "verdict": "ok", "title": "Teste", "statement_preview": "Enunciado"},
+    )
+    assert fb_resp.status_code == 200
+    assert fb_resp.json() == {"status": "recorded"}
+
+    batch_resp = client.post(
+        "/api/analyze-batch",
+        json={
+            "items": [
+                "https://codeforces.com/problemset/problem/1850/E",
+                "Dado um grafo conexo com n vertices, calcule o menor caminho. 1 <= n <= 10^5.",
+            ]
+        },
+    )
+    assert batch_resp.status_code == 200
+    batch_data = batch_resp.json()
+    assert batch_data["count"] == 2
+    assert batch_data["items"][0]["rating"] <= batch_data["items"][1]["rating"]

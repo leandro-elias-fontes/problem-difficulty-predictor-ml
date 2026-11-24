@@ -1,301 +1,601 @@
 problem_id,statement,time_limit,rating
-P-303,Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= n <= 10^5.,1.0,850.0
-P-366,"Dado um inteiro n, verifique se ele e par ou impar. Limite: 1 <= a, b <= 1000.",2.0,850.0
-P-252,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,3.0,2250.0
-P-109,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1400.0
-P-333,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,2.0,1300.0
-P-326,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 2 * 10^5.,2.0,1350.0
-P-296,"Leia tres notas, calcule a media simples e imprima o maior valor. 1 <= a, b <= 1000.",2.0,850.0
-P-209,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,1950.0
-P-105,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,3.0,2300.0
-P-275,"Leia tres notas, calcule a media simples e imprima o maior valor. 1 <= a, b <= 1000.",2.0,850.0
-P-337,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 20.,3.0,2650.0
-P-157,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 2 * 10^5.,2.0,1050.0
-P-318,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 2 * 10^5.,1.0,1050.0
-P-145,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.5,1650.0
-P-282,"Leia tres notas, calcule a media simples e imprima o maior valor. 1 <= a, b <= 1000.",2.0,800.0
-P-321,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 10^5.",2.5,2050.0
-P-389,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",2.0,1450.0
-P-311,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 2 * 10^5.,1.0,1100.0
-P-248,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,1.0,1100.0
-P-265,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 10^5.",2.5,2000.0
-P-178,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 10^5.,2.0,1000.0
-P-213,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,2.0,1000.0
-P-349,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.0,1900.0
-P-350,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2200.0
-P-204,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 20.,4.0,2500.0
-P-142,"Dado um array de n inteiros, conte quantos elementos sao pares. 1 <= n <= 10^5.",1.0,850.0
-P-381,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 1000.,1.0,1100.0
-P-395,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 1000.,1.0,1050.0
-P-257,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.5,1650.0
-P-338,"Dado um inteiro n, verifique se ele e par ou impar. Limite: 1 <= n <= 100.",2.0,850.0
-P-117,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.5,1600.0
-P-264,"Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 1 <= n, m <= 10^5.",2.5,1650.0
-P-133,Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2150.0
-P-124,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1650.0
-P-315,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2150.0
-P-219,"Leia tres notas, calcule a media simples e imprima o maior valor. 1 <= n <= 10^5.",2.0,900.0
-P-107,"Leia tres notas, calcule a media simples e imprima o maior valor. 1 <= n <= 100.",1.0,900.0
-P-190,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 10^9.,2.5,2750.0
-P-146,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.5,2000.0
-P-173,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
-P-193,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,1.0,1350.0
-P-176,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 10^{18}.,2.5,2800.0
-P-386,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 20.,3.0,2500.0
-P-160,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.5,2000.0
+P-210,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",2.0,2200.0
+P-519,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^{18}.,4.0,2750.0
+P-665,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2400.0
 P-177,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 100.",2.0,900.0
-P-163,"Dado um array de n inteiros, conte quantos elementos sao pares. 1 <= a, b <= 1000.",2.0,850.0
-P-334,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.0,1650.0
-P-329,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n, q <= 2 * 10^5.",3.0,2300.0
-P-211,Calcule o fluxo maximo e corte minimo com dinic e heavy-light decomposition hld na arvore. Limite: 1 <= n <= 10^9.,4.0,2750.0
-P-331,"Calcule a soma simples dos elementos de um array e imprima o total. 1 <= a, b <= 1000.",1.0,900.0
-P-280,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2100.0
-P-244,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.0,2050.0
-P-339,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 10^5.,2.0,1150.0
-P-175,"Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
-P-397,Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 2 <= n <= 2 * 10^5.,2.0,1500.0
-P-378,Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2250.0
-P-197,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 20.,4.0,2650.0
-P-192,Ordene o vetor de n inteiros e conte a frequencia de cada valor no mapa. 1 <= n <= 2 * 10^5.,1.0,1000.0
-P-292,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
-P-125,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.5,2000.0
-P-332,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,2.0,1050.0
-P-159,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.0,1600.0
-P-106,Calcule o fluxo maximo e corte minimo com dinic e heavy-light decomposition hld na arvore. Limite: 1 <= n <= 20.,3.0,2550.0
-P-285,Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
-P-273,Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2300.0
-P-130,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
-P-122,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 10^5.,1.0,1100.0
-P-356,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.5,2000.0
-P-156,"Dado um inteiro n, verifique se ele e par ou impar. Limite: 1 <= n <= 10^5.",1.0,850.0
-P-286,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.5,1950.0
-P-208,"Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.0,1500.0
+P-281,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^{18}.,3.0,2500.0
+P-384,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.5,2100.0
+P-110,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.0,1550.0
+P-569,"Dado um array de n inteiros, conte quantos elementos são pares. 1 <= n <= 100.",1.0,900.0
+P-178,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 10^5.",2.0,1000.0
+P-449,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 10^{18}.,4.0,2600.0
+P-155,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^9.,2.5,2700.0
+P-218,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,4.0,2750.0
+P-209,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.5,2000.0
+P-688,Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= n <= 10^5.,1.0,950.0
+P-469,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2250.0
+P-334,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.0,1700.0
+P-130,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,1.0,1300.0
+P-312,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 10^5.,2.0,1400.0
+P-284,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,1.0,1350.0
+P-186,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,1.0,1400.0
+P-102,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 2 * 10^5.,2.0,1500.0
+P-687,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 20.,4.0,2700.0
+P-635,Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 2 <= n <= 2 * 10^5.,2.5,1750.0
+P-696,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 2 * 10^5.",2.0,950.0
+P-468,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 2 * 10^5.",2.5,1850.0
+P-639,"Given two integers a and b, print their sum a + b. Constraints: 1 <= a, b <= 1000.",1.0,850.0
+P-172,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",2.0,1450.0
+P-235,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 2 * 10^5.,2.0,1250.0
+P-656,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.5,1800.0
+P-537,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.0,1600.0
+P-695,"Leia três notas, calcule a média simples e imprima o maior valor. 1 <= a, b <= 1000.",1.0,950.0
+P-263,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 2 * 10^5.,2.0,1250.0
+P-182,"Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-357,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-292,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
+P-553,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-232,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,2.5,2700.0
+P-615,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,1950.0
+P-541,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 10^5.",1.0,950.0
+P-375,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1450.0
+P-464,Conte quantas vogais existem na palavra informada e imprima o resultado. 1 <= n <= 100.,2.0,900.0
+P-129,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 2 * 10^5.,2.0,1000.0
+P-606,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 2 * 10^5.,1.0,1450.0
+P-670,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 1 <= n, m <= 10^5.",2.0,1600.0
+P-124,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.0,1700.0
+P-282,"Dado um array de n inteiros, conte quantos elementos são pares. 1 <= a, b <= 1000.",2.0,850.0
+P-573,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.0,1850.0
+P-204,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,4.0,2500.0
+P-163,"Conte quantas vogais existem na palavra informada e imprima o resultado. 1 <= a, b <= 1000.",2.0,900.0
+P-590,Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= n <= 100.,1.0,950.0
+P-345,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 10^5.,1.0,950.0
+P-348,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.0,1750.0
+P-201,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenação topológica válida usando DFS. Limite: 1 <= n, m <= 10^5.",2.0,1550.0
+P-655,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1450.0
+P-691,Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 2 <= n <= 2 * 10^5.,2.5,1650.0
+P-456,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 20.,4.0,2550.0
+P-309,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 20.,4.0,2650.0
+P-265,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.5,2050.0
+P-237,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 2 * 10^5.",2.0,2000.0
+P-295,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,3.0,2650.0
+P-176,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^{18}.,2.5,2800.0
+P-276,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 10^5.",1.0,1150.0
+P-429,Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= n <= 100.,2.0,900.0
+P-636,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,1850.0
+P-648,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,2.0,1250.0
+P-170,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,1.0,800.0
+P-661,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 2 * 10^5.,2.0,1050.0
+P-689,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 1000.,2.0,1050.0
+P-181,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 2 * 10^5.",2.5,1850.0
+P-416,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 10^5.,1.0,1000.0
+P-404,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.0,1700.0
+P-106,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,3.0,2550.0
+P-523,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 1 <= n, m <= 10^5.",2.5,1650.0
+P-474,Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 2 <= n <= 2 * 10^5.,2.5,1550.0
+P-529,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 10^5.,2.0,1500.0
+P-637,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2250.0
+P-412,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,1900.0
+P-338,"Dado um array de n inteiros, conte quantos elementos são pares. 1 <= n <= 100.",2.0,850.0
+P-659,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^{18}.,4.0,2650.0
+P-532,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2150.0
+P-386,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,3.0,2500.0
+P-526,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^9.,3.0,2800.0
+P-698,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 1 <= n, m <= 10^5.",2.5,1700.0
+P-461,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 10^5.",2.0,1950.0
+P-173,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.0,1600.0
+P-139,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 10^5.",2.0,1850.0
+P-255,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 2 * 10^5.",1.0,1000.0
+P-318,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,1.0,1050.0
+P-470,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^9.,2.5,2550.0
+P-310,"Leia dois inteiros a e b e imprima a soma simples dos dois números. 1 <= a, b <= 1000.",2.0,850.0
+P-335,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.0,1850.0
+P-646,"Leia três notas, calcule a média simples e imprima o maior valor. 1 <= n <= 10^5.",1.0,900.0
+P-160,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2050.0
+P-400,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,2.5,2550.0
+P-359,"Leia dois inteiros a e b e imprima a soma simples dos dois números. 1 <= a, b <= 1000.",2.0,900.0
+P-380,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 100.",1.0,850.0
+P-328,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.5,1900.0
+P-111,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.5,1850.0
+P-512,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,4.0,2650.0
+P-183,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^{18}.,2.5,2500.0
+P-190,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^9.,2.5,2750.0
+P-308,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2350.0
+P-638,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^{18}.,3.0,2650.0
+P-435,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^{18}.,4.0,2600.0
+P-179,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
+P-534,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 10^5.,2.0,900.0
+P-240,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 100.",1.0,900.0
+P-381,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 1000.,1.0,1150.0
+P-368,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,2.0,1250.0
+P-514,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 10^5.,1.0,1100.0
+P-299,Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.5,1600.0
+P-564,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 10^5.,2.0,1200.0
+P-675,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 10^5.,2.0,1200.0
+P-684,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.5,1750.0
+P-471,Conte quantas vogais existem na palavra informada e imprima o resultado. 1 <= n <= 10^5.,2.0,900.0
+P-499,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 100.,1.0,950.0
+P-440,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.0,1850.0
+P-248,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 10^5.",1.0,1150.0
+P-594,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.0,1850.0
+P-539,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2350.0
+P-245,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-109,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 2 * 10^5.,2.0,1450.0
+P-475,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.5,2050.0
+P-623,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",3.0,2100.0
+P-288,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^{18}.,3.0,2600.0
+P-231,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,2.0,2300.0
+P-672,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2400.0
+P-398,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.0,1950.0
+P-686,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-546,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n <= 2 * 10^5.",2.0,2100.0
+P-184,"Leia três notas, calcule a média simples e imprima o maior valor. 1 <= n <= 10^5.",2.0,900.0
+P-692,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 2 * 10^5.",2.0,1950.0
+P-277,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
+P-253,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^{18}.,2.5,2600.0
+P-552,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.5,2100.0
+P-296,"Dado um array de n inteiros, conte quantos elementos são pares. 1 <= a, b <= 1000.",2.0,900.0
+P-175,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-192,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 2 * 10^5.,1.0,1000.0
+P-396,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 10^5.,1.0,1200.0
+P-168,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",3.0,2200.0
+P-115,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 10^5.,2.0,1000.0
+P-304,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 2 * 10^5.",2.0,950.0
+P-258,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.5,1950.0
+P-188,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.0,1900.0
+P-597,"Dado um inteiro n, verifique se ele é par ou ímpar. Limite: 1 <= a, b <= 1000.",2.0,800.0
+P-217,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",3.0,2150.0
+P-482,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 10^5.,2.5,2050.0
+P-505,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^9.,3.0,2800.0
+P-133,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2150.0
+P-100,"Leia três notas, calcule a média simples e imprima o maior valor. 1 <= a, b <= 1000.",1.0,900.0
+P-693,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n <= 2 * 10^5.",3.0,2150.0
+P-631,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^9.,4.0,2550.0
+P-453,Verifique se o grafo direcionado possui ciclo e imprima uma ordenação topológica válida usando DFS. Limite: 2 <= n <= 2 * 10^5.,2.0,1650.0
+P-432,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.5,1700.0
+P-634,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 2 * 10^5.,1.0,1450.0
+P-344,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^{18}.,3.0,2650.0
+P-122,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,1.0,1150.0
+P-540,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,3.0,2450.0
+P-216,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.0,2050.0
+P-189,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,3.0,2400.0
+P-465,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 2 * 10^5.,2.0,1200.0
+P-311,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,1.0,1150.0
+P-118,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.0,2050.0
+P-507,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,2.0,950.0
+P-420,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2300.0
+P-244,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 2 * 10^5.",2.0,2100.0
+P-389,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",2.0,1500.0
+P-374,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 10^5.,1.0,1050.0
+P-641,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 10^5.,2.0,1300.0
+P-460,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.0,1650.0
+P-350,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",3.0,2200.0
+P-387,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,1.0,900.0
+P-628,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.0,1650.0
+P-500,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 10^5.",1.0,950.0
+P-267,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^{18}.,2.5,2500.0
+P-154,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2100.0
+P-593,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenação topológica válida usando DFS. Limite: 1 <= n, m <= 10^5.",2.0,1700.0
+P-146,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2050.0
+P-193,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 2 * 10^5.,1.0,1400.0
+P-364,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",3.0,2200.0
+P-208,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 1 <= n, m <= 10^5.",2.0,1500.0
+P-372,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^9.,2.5,2450.0
+P-699,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 2 * 10^5.",2.0,1900.0
+P-579,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.0,1600.0
+P-536,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1250.0
+P-483,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n <= 2 * 10^5.",2.0,2250.0
+P-480,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,1.0,1350.0
+P-562,"Calcule a soma simples dos elementos de um array e imprima o total. 1 <= a, b <= 1000.",1.0,800.0
+P-494,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,1.0,1500.0
+P-365,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,4.0,2500.0
+P-580,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.5,1950.0
+P-617,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^9.,4.0,2550.0
+P-169,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 20.,2.5,2800.0
+P-331,"Dado um inteiro n, verifique se ele é par ou ímpar. Limite: 1 <= a, b <= 1000.",1.0,950.0
+P-503,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2000.0
+P-378,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2250.0
+P-572,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.0,1750.0
+P-450,"Verifique se a string informada é um palíndromo simples. Limite: 1 <= a, b <= 1000.",1.0,950.0
+P-609,"Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-249,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1300.0
+P-224,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2250.0
+P-528,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,2.0,1150.0
+P-565,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.0,1550.0
+P-285,Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
+P-327,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.5,1600.0
+P-391,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.0,1950.0
+P-347,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1250.0
+P-390,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.0,1500.0
+P-349,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.0,1950.0
+P-543,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,1.0,1500.0
+P-651,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,2.0,2300.0
+P-652,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^9.,2.5,2600.0
+P-650,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.5,1800.0
+P-214,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1300.0
+P-303,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 10^5.",1.0,850.0
+P-241,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,1.0,1100.0
+P-438,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 2 * 10^5.",1.0,1450.0
+P-107,Verifique se a string informada é um palíndromo simples. Limite: 1 <= n <= 100.,1.0,900.0
+P-621,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.5,1600.0
+P-119,"Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2300.0
+P-272,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 10^5.",2.5,2100.0
+P-551,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.0,1700.0
+P-156,"Leia três notas, calcule a média simples e imprima o maior valor. 1 <= n <= 10^5.",1.0,850.0
+P-401,Verifique se a string informada é um palíndromo simples. Limite: 1 <= n <= 100.,2.0,850.0
+P-436,"Dado um inteiro n, verifique se ele é par ou ímpar. Limite: 1 <= n <= 100.",2.0,800.0
+P-550,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,2.0,1350.0
+P-422,Leia dois inteiros a e b e imprima a soma simples dos dois números. 1 <= n <= 10^5.,2.0,800.0
+P-410,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,2.0,1450.0
+P-149,Leia dois inteiros a e b e imprima a soma simples dos dois números. 1 <= n <= 100.,2.0,850.0
+P-444,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,2.0,1150.0
+P-125,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 2 * 10^5.",2.5,2050.0
+P-542,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 10^5.,1.0,1150.0
+P-320,Verifique se o grafo direcionado possui ciclo e imprima uma ordenação topológica válida usando DFS. Limite: 2 <= n <= 2 * 10^5.,2.0,1650.0
+P-583,"Leia três notas, calcule a média simples e imprima o maior valor. 1 <= a, b <= 1000.",1.0,850.0
+P-640,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 1000.,2.0,1150.0
+P-142,Conte quantas vogais existem na palavra informada e imprima o resultado. 1 <= n <= 10^5.,1.0,900.0
+P-516,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.5,1550.0
+P-361,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 2 * 10^5.,1.0,1250.0
+P-508,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,2.0,1450.0
+P-377,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 10^5.",2.5,1900.0
+P-669,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 10^5.,1.0,1300.0
+P-481,"Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 1 <= n, m <= 10^5.",2.0,1550.0
+P-511,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-254,Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= n <= 100.,2.0,950.0
 P-226,"Given two integers a and b, print their sum a + b. Constraints: 1 <= a, b <= 1000.",1.0,850.0
-P-330,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 10^9.,4.0,2650.0
-P-293,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 2 * 10^5.",2.5,1900.0
-P-229,"Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.5,1650.0
-P-382,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 10^5.,2.0,1350.0
-P-182,"Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
-P-184,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 10^5.,2.0,850.0
-P-166,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao topologica valida usando DFS. Limite: 1 <= n, m <= 10^5.",2.5,1600.0
-P-388,Ordene o vetor de n inteiros e conte a frequencia de cada valor no mapa. 1 <= n <= 2 * 10^5.,1.0,1050.0
-P-263,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1250.0
-P-254,"Dado um array de n inteiros, conte quantos elementos sao pares. 1 <= n <= 100.",2.0,900.0
-P-119,"Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2250.0
-P-224,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2200.0
-P-179,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
-P-214,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1300.0
-P-218,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 20.,4.0,2750.0
-P-172,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",2.0,1400.0
-P-115,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 10^5.,2.0,1000.0
-P-110,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao topologica valida usando DFS. Limite: 1 <= n, m <= 10^5.",2.0,1550.0
-P-294,"Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2200.0
-P-201,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.0,1550.0
-P-168,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n <= 2 * 10^5.",3.0,2150.0
-P-324,"Dado um array de n inteiros, conte quantos elementos sao pares. 1 <= n <= 100.",1.0,800.0
-P-137,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 10^5.,1.0,1300.0
-P-116,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 10^5.,2.0,1300.0
-P-279,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.0,1800.0
-P-247,Verifique se a string informada e um palindromo simples. Limite: 1 <= n <= 10^5.,2.0,850.0
-P-374,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,1.0,1000.0
-P-167,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.0,1900.0
-P-328,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 2 * 10^5.",2.5,1900.0
-P-169,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 20.,2.5,2800.0
-P-131,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.5,1650.0
-P-283,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 10^5.,1.0,1100.0
-P-365,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 20.,4.0,2500.0
-P-325,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,2.0,1100.0
-P-240,Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= n <= 100.,1.0,850.0
-P-118,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.0,2000.0
-P-281,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 10^{18}.,3.0,2500.0
-P-196,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2300.0
-P-232,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 20.,2.5,2700.0
-P-362,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.5,1600.0
-P-186,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 2 * 10^5.,1.0,1400.0
-P-348,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1700.0
-P-345,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 10^5.,1.0,900.0
-P-216,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.0,2000.0
-P-246,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 10^{18}.,4.0,2600.0
-P-392,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2200.0
-P-297,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,1.0,1000.0
-P-306,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.0,1550.0
-P-155,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 10^9.,2.5,2700.0
-P-272,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2050.0
-P-284,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1350.0
-P-267,Calcule o fluxo maximo e corte minimo com dinic e heavy-light decomposition hld na arvore. Limite: 1 <= n <= 10^{18}.,2.5,2500.0
-P-239,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 20.,2.5,2650.0
-P-353,Ordene o vetor de n inteiros e conte a frequencia de cada valor no mapa. 1 <= n <= 1000.,2.0,1000.0
-P-138,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1650.0
-P-225,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 20.,3.0,2600.0
-P-295,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 20.,3.0,2650.0
-P-383,Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao topologica valida usando DFS. Limite: 2 <= n <= 2 * 10^5.,2.5,1600.0
-P-237,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.0,1950.0
-P-212,"Verifique se a string informada e um palindromo simples. Limite: 1 <= a, b <= 1000.",1.0,800.0
-P-268,Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= n <= 10^5.,1.0,850.0
-P-217,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n <= 2 * 10^5.",3.0,2100.0
-P-377,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,1900.0
-P-371,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
-P-255,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,1.0,950.0
-P-276,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,1.0,1100.0
-P-278,Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 2 <= n <= 2 * 10^5.,2.5,1700.0
-P-102,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 2 * 10^5.,2.0,1450.0
-P-215,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.5,1650.0
-P-243,Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
-P-277,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
-P-220,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,1.0,1100.0
-P-310,"Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= a, b <= 1000.",2.0,850.0
-P-360,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,2.0,1050.0
-P-227,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,2.0,1000.0
-P-174,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.0,1950.0
-P-129,Ordene o vetor de n inteiros e conte a frequencia de cada valor no mapa. 1 <= n <= 2 * 10^5.,2.0,1000.0
-P-183,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 10^{18}.,2.5,2500.0
-P-369,Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 2 <= n <= 2 * 10^5.,2.5,1700.0
-P-207,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",2.0,1250.0
-P-323,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 10^9.,4.0,2650.0
-P-258,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.5,1900.0
-P-380,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 100.",1.0,800.0
-P-346,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,2.0,1100.0
-P-322,"Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
-P-165,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 10^5.,1.0,1200.0
-P-298,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 10^5.,1.0,1350.0
-P-185,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,1.0,1100.0
-P-313,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.0,1650.0
-P-259,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2200.0
-P-112,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2300.0
-P-135,"Dado um inteiro n, verifique se ele e par ou impar. Limite: 1 <= a, b <= 1000.",2.0,800.0
-P-128,Verifique se a string informada e um palindromo simples. Limite: 1 <= n <= 100.,1.0,800.0
-P-242,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1350.0
-P-384,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 2 * 10^5.",2.5,2050.0
-P-354,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1250.0
-P-270,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 2 * 10^5.,1.0,1400.0
-P-151,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 10^5.,1.0,1250.0
-P-195,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 2 * 10^5.",2.5,1800.0
-P-308,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2300.0
-P-347,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1250.0
-P-141,Calcule o fluxo maximo e corte minimo com dinic e heavy-light decomposition hld na arvore. Limite: 1 <= n <= 20.,2.5,2800.0
-P-189,Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2350.0
-P-344,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 10^{18}.,3.0,2650.0
-P-236,"Dado um grafo conexo com n vertices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.5,1550.0
-P-126,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n, q <= 2 * 10^5.",3.0,2250.0
-P-393,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 20.,4.0,2600.0
-P-241,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 10^5.,1.0,1050.0
-P-300,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 2 * 10^5.",2.5,2000.0
-P-100,"Dado um inteiro n, verifique se ele e par ou impar. Limite: 1 <= a, b <= 1000.",1.0,900.0
-P-368,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",2.0,1250.0
-P-372,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 10^9.,2.5,2450.0
-P-200,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 2 * 10^5.,2.0,1350.0
-P-359,"Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= a, b <= 1000.",2.0,850.0
-P-355,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1700.0
-P-271,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.5,1500.0
-P-198,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 10^5.,2.0,900.0
-P-136,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 10^5.,2.0,1000.0
-P-161,"Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2250.0
-P-250,"Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 1 <= n, m <= 10^5.",2.5,1550.0
-P-336,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,2.0,2350.0
-P-302,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 20.,2.5,2750.0
-P-342,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 10^5.",2.5,2000.0
-P-111,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,1850.0
-P-396,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 10^5.,1.0,1200.0
-P-367,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 2 * 10^5.,2.0,1000.0
-P-127,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 20.,3.0,2450.0
-P-319,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 10^5.,1.0,1400.0
-P-104,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,1900.0
-P-222,Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
-P-132,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.0,1950.0
-P-304,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,2.0,950.0
-P-262,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,1.0,1150.0
-P-309,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 20.,4.0,2650.0
-P-385,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n <= 2 * 10^5.",2.0,2350.0
-P-238,Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2300.0
-P-162,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 20.,2.5,2700.0
-P-235,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1200.0
-P-228,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,1.0,1450.0
-P-390,"Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 1 <= n, m <= 10^5.",2.0,1500.0
-P-108,Ordene o vetor de n inteiros e conte a frequencia de cada valor no mapa. 1 <= n <= 2 * 10^5.,1.0,1100.0
-P-170,Verifique se a string informada e um palindromo simples. Limite: 1 <= n <= 100.,1.0,800.0
-P-364,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n <= 2 * 10^5.",3.0,2150.0
-P-164,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,2.0,950.0
-P-144,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 2 * 10^5.,1.0,1300.0
-P-379,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 10^9.,2.5,2700.0
-P-256,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 10^5.,1.0,1350.0
-P-140,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2350.0
-P-223,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 2 * 10^5.",2.0,1850.0
-P-375,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 2 * 10^5.,2.0,1400.0
-P-316,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 10^{18}.,3.0,2800.0
-P-253,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 10^{18}.,2.5,2600.0
-P-123,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 2 * 10^5.",1.0,1250.0
-P-361,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
-P-210,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n <= 2 * 10^5.",2.0,2200.0
-P-181,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 2 * 10^5.",2.5,1850.0
-P-307,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.0,1800.0
-P-312,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,2.0,1350.0
-P-139,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.0,1850.0
-P-340,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 2 * 10^5.,2.0,1300.0
-P-391,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.0,1900.0
-P-358,Calcule o fluxo maximo e corte minimo com dinic e heavy-light decomposition hld na arvore. Limite: 1 <= n <= 10^9.,2.5,2750.0
-P-299,Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 2 <= n <= 2 * 10^5.,2.5,1600.0
-P-114,"Leia tres notas, calcule a media simples e imprima o maior valor. 1 <= a, b <= 1000.",1.0,800.0
-P-147,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,2.0,2200.0
-P-194,"Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 1 <= n, m <= 10^5.",2.0,1700.0
-P-363,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.0,1950.0
-P-327,"Conte subsequencias validas de tamanho k modulo 10^9 + 7 usando programacao dinamica e knapsack. Limite: 1 <= n, m <= 10^5.",2.5,1600.0
-P-373,"Leia tres notas, calcule a media simples e imprima o maior valor. 1 <= n <= 100.",2.0,850.0
-P-301,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,3.0,2250.0
-P-261,Verifique se a string informada e um palindromo simples. Limite: 1 <= n <= 10^5.,1.0,800.0
-P-143,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 1000.,1.0,950.0
-P-317,Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= n <= 10^5.,2.0,900.0
-P-245,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2100.0
-P-290,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,1.0,1000.0
-P-320,Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao topologica valida usando DFS. Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
-P-351,Calcule o fluxo maximo e corte minimo com dinic e heavy-light decomposition hld na arvore. Limite: 1 <= n <= 20.,3.0,2650.0
-P-103,Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao topologica valida usando DFS. Limite: 2 <= n <= 2 * 10^5.,2.5,1550.0
-P-205,Verifique se a string informada e um palindromo simples. Limite: 1 <= n <= 100.,2.0,800.0
-P-153,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.5,1900.0
-P-233,Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= n <= 10^5.,2.0,900.0
-P-101,Ordene o vetor de n inteiros e conte a frequencia de cada valor no mapa. 1 <= n <= 2 * 10^5.,1.0,1100.0
-P-231,Responda q consultas e atualizacoes em intervalo usando arvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2250.0
-P-203,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2100.0
-P-149,Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= n <= 100.,2.0,850.0
-P-180,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao topologica valida usando DFS. Limite: 1 <= n, m <= 10^5.",2.5,1700.0
-P-305,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 10^5.,2.0,1250.0
-P-134,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 10^{18}.,4.0,2500.0
-P-191,"Leia dois inteiros a e b e imprima a soma simples dos dois numeros. 1 <= a, b <= 1000.",2.0,850.0
-P-152,"Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.5,1550.0
-P-341,Encontre a arvore geradora minima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1700.0
-P-113,Resolva a recorrencia linear sobre uma matriz modulo 10^9 + 7 usando exponenciacao rapida de matrizes. Limite: 1 <= n <= 20.,2.5,2600.0
-P-188,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.0,1900.0
-P-266,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2150.0
-P-394,"Verifique se a string informada e um palindromo simples. Limite: 1 <= a, b <= 1000.",1.0,850.0
-P-234,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 10^5.,1.0,1050.0
-P-387,Verifique se a string informada e um palindromo simples. Limite: 1 <= n <= 100.,1.0,850.0
-P-343,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2300.0
-P-154,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2100.0
-P-150,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,1.0,1050.0
-P-274,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 20.,2.5,2500.0
-P-289,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 100.",2.0,800.0
-P-398,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.0,1900.0
-P-287,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,2.0,2150.0
-P-269,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,2.0,950.0
-P-158,Ordene a permutacao minimizando o custo de trocas adjacentes com estrategia gulosa. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
-P-148,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 20.,3.0,2650.0
-P-335,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 10^5.",2.0,1850.0
-P-352,"Given two integers a and b, print their sum a + b. Constraints: 1 <= a, b <= 1000.",2.0,900.0
-P-121,"Leia tres notas, calcule a media simples e imprima o maior valor. 1 <= n <= 10^5.",1.0,850.0
-P-260,Otimize a programacao dinamica em matriz grid usando convex hull trick e centroid decomposition modulo 998244353. Limite: 1 <= n <= 10^9.,4.0,2550.0
-P-376,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao topologica valida usando DFS. Limite: 1 <= n, m <= 10^5.",2.5,1550.0
-P-291,Encontre o menor valor x para dividir o vetor em k blocos usando busca binaria na resposta monotona. Limite: 1 <= n <= 2 * 10^5.,2.0,1350.0
-P-357,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e arvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
-P-249,"Dados n intervalos disjuntos na reta, escolha o maximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1300.0
-P-230,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 10^5.,2.5,1950.0
-P-251,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.0,1900.0
-P-199,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 10^5.,2.0,1000.0
-P-187,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenacao topologica valida usando DFS. Limite: 1 <= n, m <= 10^5.",2.0,1750.0
-P-314,Calcule o conjunto independente maximo usando programacao dinamica em arvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.5,1850.0
-P-221,Calcule os numeros primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1350.0
-P-399,"Dado um grafo com arvore enraizada, responda q consultas em subarvore com programacao dinamica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2300.0
-P-120,Calcule o fluxo maximo e corte minimo com dinic e heavy-light decomposition hld na arvore. Limite: 1 <= n <= 10^{18}.,2.5,2500.0
-P-288,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programacao dinamica modulo 998244353. Limite: 1 <= n <= 10^{18}.,3.0,2600.0
-P-171,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,1.0,1150.0
-P-206,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,1.0,1000.0
-P-370,"Dada uma arvore enraizada com n vertices, calcule o diametro e o ancestral comum lca para cada subarvore. Limite: 1 <= n <= 10^5.",2.5,1900.0
-P-202,Conte ocorrencias de padroes usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.5,2000.0
+P-409,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 10^5.,1.0,1150.0
+P-619,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,2.0,1150.0
+P-545,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.0,2100.0
+P-274,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 20.,2.5,2500.0
+P-131,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.5,1650.0
+P-213,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 1000.,2.0,1000.0
+P-123,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 2 * 10^5.",1.0,1250.0
+P-273,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2350.0
+P-657,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 10^5.",2.0,1800.0
+P-166,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.5,1600.0
+P-157,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,2.0,1100.0
+P-421,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^{18}.,2.5,2650.0
+P-322,"Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-117,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.5,1600.0
+P-399,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2350.0
+P-355,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.0,1750.0
+P-405,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 10^5.",2.0,1850.0
+P-673,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,4.0,2500.0
+P-290,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 10^5.",1.0,1050.0
+P-418,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 1 <= n, m <= 10^5.",2.0,1600.0
+P-627,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 10^5.,1.0,1400.0
+P-371,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-194,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.0,1750.0
+P-280,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2100.0
+P-431,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,2.0,1450.0
+P-428,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^9.,3.0,2450.0
+P-411,"Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 1 <= n, m <= 10^5.",2.5,1750.0
+P-105,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,3.0,2350.0
+P-145,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenação topológica válida usando DFS. Limite: 1 <= n, m <= 10^5.",2.5,1650.0
+P-498,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 20.,3.0,2600.0
+P-676,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
+P-568,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^9.,4.0,2600.0
+P-116,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,2.0,1350.0
+P-148,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 20.,3.0,2650.0
+P-679,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2300.0
+P-587,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 2 * 10^5.",2.5,2000.0
+P-103,Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 2 <= n <= 2 * 10^5.,2.5,1550.0
+P-586,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.0,1650.0
+P-538,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.0,1900.0
+P-462,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",2.0,2300.0
+P-533,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^{18}.,4.0,2750.0
+P-402,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 2 * 10^5.,1.0,1000.0
+P-325,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 2 * 10^5.,2.0,1100.0
+P-126,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2250.0
+P-524,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 2 * 10^5.",2.5,2100.0
+P-363,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 10^5.,2.0,2000.0
+P-150,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 1000.,1.0,1050.0
+P-329,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2350.0
+P-137,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,1.0,1300.0
+P-257,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.5,1700.0
+P-337,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 20.,3.0,2650.0
+P-674,"Dado um inteiro n, verifique se ele é par ou ímpar. Limite: 1 <= n <= 10^5.",1.0,950.0
+P-275,"Verifique se a string informada é um palíndromo simples. Limite: 1 <= a, b <= 1000.",2.0,900.0
+P-614,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.0,1800.0
+P-457,Conte quantas vogais existem na palavra informada e imprima o resultado. 1 <= n <= 100.,1.0,800.0
+P-294,"Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2250.0
+P-603,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^{18}.,2.5,2650.0
+P-678,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 10^5.,2.5,1950.0
+P-611,"Dado um array de n inteiros, conte quantos elementos são pares. 1 <= n <= 100.",1.0,950.0
+P-167,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.0,1900.0
+P-419,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.5,2000.0
+P-268,Leia dois inteiros a e b e imprima a soma simples dos dois números. 1 <= n <= 10^5.,1.0,900.0
+P-467,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.0,1600.0
+P-262,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 2 * 10^5.",1.0,1150.0
+P-293,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 2 * 10^5.",2.5,1900.0
+P-252,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,3.0,2250.0
+P-601,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.0,2000.0
+P-446,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.5,1750.0
+P-585,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,2.0,1300.0
+P-433,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.5,2000.0
+P-203,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2100.0
+P-490,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-174,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 10^5.",2.0,2000.0
+P-522,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 2 * 10^5.,2.0,1400.0
+P-677,"Verifique se o grafo direcionado possui ciclo e imprima uma ordenação topológica válida usando DFS. Limite: 1 <= n, m <= 10^5.",2.0,1500.0
+P-219,Verifique se a string informada é um palíndromo simples. Limite: 1 <= n <= 10^5.,2.0,900.0
+P-496,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.5,2000.0
+P-509,Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.5,1650.0
+P-581,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2300.0
+P-307,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.0,1800.0
+P-434,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",3.0,2250.0
+P-452,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,2.0,1300.0
+P-441,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2350.0
+P-504,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2300.0
+P-108,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 2 * 10^5.,1.0,1150.0
+P-477,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,2.5,2600.0
+P-136,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,2.0,1000.0
+P-239,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 20.,2.5,2650.0
+P-353,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 1000.,2.0,1050.0
+P-403,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,1.0,1200.0
+P-642,Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.5,1500.0
+P-159,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.0,1650.0
+P-211,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^9.,4.0,2750.0
+P-463,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,2.5,2550.0
+P-454,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.0,1900.0
+P-362,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.5,1600.0
+P-625,"Leia dois inteiros a e b e imprima a soma simples dos dois números. 1 <= a, b <= 1000.",2.0,800.0
+P-397,Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1500.0
+P-250,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.5,1550.0
+P-366,"Dado um array de n inteiros, conte quantos elementos são pares. 1 <= a, b <= 1000.",2.0,900.0
+P-618,"Dado um inteiro n, verifique se ele é par ou ímpar. Limite: 1 <= a, b <= 1000.",1.0,850.0
+P-630,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",2.0,2350.0
+P-138,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.0,1700.0
+P-531,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 10^5.,2.5,2000.0
+P-407,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 20.,4.0,2500.0
+P-298,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,1.0,1350.0
+P-455,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-246,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^{18}.,4.0,2600.0
+P-570,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,1.0,1150.0
+P-632,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 100.,1.0,900.0
+P-247,Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= n <= 10^5.,2.0,850.0
+P-520,Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= n <= 100.,1.0,900.0
+P-448,"Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-425,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.0,1700.0
+P-613,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 10^5.,1.0,1400.0
+P-223,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 2 * 10^5.",2.0,1900.0
+P-602,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2350.0
+P-196,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2350.0
+P-243,Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.0,1650.0
+P-339,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 10^5.,2.0,1200.0
+P-525,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-197,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 20.,4.0,2650.0
+P-424,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,1.0,1200.0
+P-379,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^9.,2.5,2700.0
+P-393,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 20.,4.0,2600.0
+P-577,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 2 * 10^5.,2.0,1200.0
+P-222,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.0,1650.0
+P-283,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 10^5.,1.0,1150.0
+P-302,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,2.5,2750.0
+P-423,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 1000.,1.0,1100.0
+P-346,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 2 * 10^5.,2.0,1150.0
+P-612,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,1.0,1050.0
+P-557,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,2.0,1450.0
+P-578,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,1.0,1250.0
+P-599,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 10^5.,1.0,1450.0
+P-629,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 10^5.,2.5,2050.0
+P-488,Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 2 <= n <= 2 * 10^5.,2.0,1600.0
+P-225,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,3.0,2600.0
+P-681,"Dado um inteiro n, verifique se ele é par ou ímpar. Limite: 1 <= n <= 10^5.",1.0,950.0
+P-323,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^9.,4.0,2650.0
+P-442,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 10^{18}.,4.0,2600.0
+P-153,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.5,1900.0
+P-319,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 10^5.,1.0,1450.0
+P-229,"Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 1 <= n, m <= 10^5.",2.5,1650.0
+P-643,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.5,2000.0
+P-493,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 2 * 10^5.,2.0,1050.0
+P-547,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^{18}.,3.0,2550.0
+P-645,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^9.,3.0,2450.0
+P-495,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 1 <= n, m <= 10^5.",2.0,1600.0
+P-666,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,3.0,2750.0
+P-502,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.5,1600.0
+P-486,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 2 * 10^5.,2.0,1050.0
+P-680,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 10^{18}.,3.0,2750.0
+P-394,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,1.0,900.0
+P-600,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.0,1550.0
+P-582,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^{18}.,3.0,2450.0
+P-515,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",1.0,1350.0
+P-212,"Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= a, b <= 1000.",1.0,800.0
+P-279,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 2 * 10^5.",2.0,1800.0
+P-521,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 1000.,1.0,1000.0
+P-567,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2350.0
+P-549,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,1.0,1000.0
+P-473,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 10^5.,1.0,1450.0
+P-414,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^{18}.,4.0,2600.0
+P-251,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.0,1900.0
+P-682,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 10^5.,1.0,950.0
+P-333,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 10^5.,2.0,1300.0
+P-406,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",2.0,2100.0
+P-649,"Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 1 <= n, m <= 10^5.",2.0,1750.0
+P-264,"Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 1 <= n, m <= 10^5.",2.5,1700.0
+P-417,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",2.0,1200.0
+P-236,Verifique se o grafo direcionado possui ciclo e imprima uma ordenação topológica válida usando DFS. Limite: 2 <= n <= 2 * 10^5.,2.5,1550.0
+P-510,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.5,1900.0
+P-297,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 10^5.",1.0,1050.0
+P-668,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,1.0,1150.0
+P-358,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 10^9.,2.5,2750.0
+P-332,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,2.0,1050.0
+P-215,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.5,1650.0
+P-220,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 2 * 10^5.",1.0,1150.0
+P-588,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2100.0
+P-476,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",3.0,2200.0
+P-484,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^{18}.,3.0,2650.0
+P-324,Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= n <= 100.,1.0,800.0
+P-667,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,1.0,950.0
+P-556,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 1000.,2.0,1050.0
+P-447,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 2 * 10^5.,2.0,1850.0
+P-227,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 2 * 10^5.,2.0,1000.0
+P-690,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,1.0,1350.0
+P-385,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",2.0,2350.0
+P-653,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,1.0,950.0
+P-143,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 1000.,1.0,950.0
+P-207,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 10^5.",2.0,1250.0
+P-664,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.5,2050.0
+P-544,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.0,1550.0
+P-233,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 10^5.",2.0,950.0
+P-595,"Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-144,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 2 * 10^5.,1.0,1350.0
+P-269,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 1000.,2.0,950.0
+P-165,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,1.0,1200.0
+P-383,Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 2 <= n <= 2 * 10^5.,2.5,1650.0
+P-185,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 1000.",1.0,1150.0
+P-342,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.5,2050.0
+P-286,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2000.0
+P-426,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2050.0
+P-259,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2250.0
+P-112,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2300.0
+P-135,"Dado um array de n inteiros, conte quantos elementos são pares. 1 <= a, b <= 1000.",2.0,800.0
+P-128,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,1.0,850.0
+P-270,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,1.0,1450.0
+P-242,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 2 * 10^5.,2.0,1350.0
+P-336,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,2.0,2400.0
+P-563,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 1000.",2.0,1050.0
+P-596,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,2.5,2750.0
+P-321,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.5,2050.0
+P-644,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2300.0
+P-195,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 2 * 10^5.",2.5,1800.0
+P-151,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,1.0,1250.0
+P-340,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1350.0
+P-607,Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 2 <= n <= 2 * 10^5.,2.5,1650.0
+P-451,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 1000.,2.0,1100.0
+P-616,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2250.0
+P-278,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.5,1700.0
+P-560,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",3.0,2150.0
+P-626,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 2 * 10^5.,2.0,1100.0
+P-141,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 20.,2.5,2800.0
+P-654,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 1000.,2.0,950.0
+P-622,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 10^5.",2.5,2100.0
+P-306,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 2 <= n <= 2 * 10^5.",2.0,1550.0
+P-492,Leia a idade de n alunos e imprima a maior e a menor idade. Limite: 1 <= n <= 100.,2.0,950.0
+P-382,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,2.0,1350.0
+P-458,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 10^5.,1.0,1150.0
+P-497,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n <= 2 * 10^5.",2.0,2150.0
+P-354,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 2 * 10^5.,2.0,1250.0
+P-317,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 10^5.",2.0,950.0
+P-104,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.5,1900.0
+P-356,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 10^5.,2.5,2000.0
+P-663,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 1 <= n, m <= 10^5.",2.0,1750.0
+P-633,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 10^5.,1.0,1200.0
+P-530,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.5,1600.0
+P-200,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 2 * 10^5.,2.0,1400.0
+P-326,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,2.0,1400.0
+P-548,"Conte quantas vogais existem na palavra informada e imprima o resultado. 1 <= a, b <= 1000.",1.0,900.0
+P-647,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,1.0,1000.0
+P-671,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2050.0
+P-313,"Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho entre 1 e n via BFS ou Dijkstra. Limite: 1 <= n, m <= 10^5.",2.0,1700.0
+P-459,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,1.0,1250.0
+P-271,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 2 <= n <= 2 * 10^5.",2.5,1500.0
+P-198,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 10^5.,2.0,950.0
+P-392,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2200.0
+P-315,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-161,"Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2250.0
+P-506,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,2.0,850.0
+P-147,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n <= 2 * 10^5.",2.0,2250.0
+P-132,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.0,2000.0
+P-517,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 2 * 10^5.",2.0,2000.0
+P-367,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,2.0,1000.0
+P-427,Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n <= 2 * 10^5.,2.0,2300.0
+P-300,"Dada uma árvore enraizada com n vértices, calcule o diâmetro e o ancestral comum LCA para cada subárvore. Limite: 1 <= n <= 2 * 10^5.",2.5,2000.0
+P-234,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 10^5.,1.0,1100.0
+P-127,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,3.0,2450.0
+P-624,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,4.0,2600.0
+P-605,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 1000.,1.0,1200.0
+P-330,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^9.,4.0,2650.0
+P-589,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^{18}.,4.0,2700.0
+P-360,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 2 * 10^5.,2.0,1050.0
+P-478,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 10^5.",2.0,850.0
+P-388,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 2 * 10^5.,1.0,1100.0
+P-518,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,2.0,2200.0
+P-491,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^9.,3.0,2650.0
+P-598,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,2.0,1000.0
+P-238,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2350.0
+P-162,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 20.,2.5,2700.0
+P-571,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,2.0,1250.0
+P-228,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 2 * 10^5.,1.0,1450.0
+P-683,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 10^5.,2.0,1500.0
+P-620,Conte quantas formas existem de alocar tarefas usando busca binária e fila de prioridade (heap). Limite: 1 <= n <= 2 * 10^5.,2.0,1250.0
+P-164,Agrupe os alunos por pontuação usando dicionário/hash e ordene pelo nome. 1 <= n <= 10^5.,2.0,1000.0
+P-114,"Verifique se a string informada é um palíndromo simples. Limite: 1 <= a, b <= 1000.",1.0,850.0
+P-256,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 10^5.,1.0,1400.0
+P-140,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2350.0
+P-592,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 10^5.,2.0,1250.0
+P-479,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 2 * 10^5.,2.0,1150.0
+P-287,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n <= 2 * 10^5.",2.0,2150.0
+P-316,Resolva a recorrência linear sobre uma matriz módulo 10^9 + 7 usando exponenciação rápida de matrizes. Limite: 1 <= n <= 10^{18}.,3.0,2800.0
+P-152,"Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 1 <= n, m <= 10^5.",2.5,1550.0
+P-437,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 10^5.,2.0,1050.0
+P-395,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,1.0,1050.0
+P-351,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,3.0,2650.0
+P-561,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,2.5,2500.0
+P-555,"Verifique se a string informada é um palíndromo simples. Limite: 1 <= a, b <= 1000.",1.0,800.0
+P-697,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,2.0,1450.0
+P-369,Encontre a árvore geradora mínima usando Kruskal e union-find dsu no grafo. Limite: 2 <= n <= 2 * 10^5.,2.5,1700.0
+P-301,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n <= 2 * 10^5.",3.0,2250.0
+P-261,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,1.0,800.0
+P-501,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 10^5.,2.0,1250.0
+P-576,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 10^5.",1.0,850.0
+P-205,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,2.0,800.0
+P-489,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 10^5.,2.0,2100.0
+P-101,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 2 * 10^5.,1.0,1100.0
+P-658,Responda q consultas e atualizações em intervalo usando árvore de segmentos com lazy propagation. Limite: 1 <= n <= 2 * 10^5.,3.0,2150.0
+P-180,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.5,1750.0
+P-305,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 10^5.,2.0,1300.0
+P-134,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 10^{18}.,4.0,2500.0
+P-608,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.0,2100.0
+P-527,"Leia três notas, calcule a média simples e imprima o maior valor. 1 <= n <= 10^5.",2.0,800.0
+P-554,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 20.,3.0,2550.0
+P-466,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,1.0,1500.0
+P-191,"Given two integers a and b, print their sum a + b. Constraints: 1 <= a, b <= 1000.",2.0,900.0
+P-439,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.0,1550.0
+P-445,"Dados n intervalos disjuntos na reta, escolha o máximo de intervalos de forma gulosa. Limite: 1 <= n <= 2 * 10^5.",1.0,1350.0
+P-341,Calcule o número de maneiras distintas de dar o troco para um valor V usando programação dinâmica (DP) módulo 10^9 + 7. Limite: 2 <= n <= 2 * 10^5.,2.0,1700.0
+P-113,Otimize a programação dinâmica em matriz grid usando convex hull trick e centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,2.5,2600.0
+P-415,Verifique se a string informada é um palíndromo simples. Limite: 1 <= n <= 100.,1.0,900.0
+P-487,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,2.0,1350.0
+P-373,Verifique se a string informada é um palíndromo simples. Limite: 1 <= n <= 100.,2.0,850.0
+P-266,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",2.0,2150.0
+P-694,Conte caminhos hamiltonianos no caixeiro viajante em um grafo usando bitmask programação dinâmica módulo 998244353. Limite: 1 <= n <= 10^9.,4.0,2450.0
+P-584,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 1000.,2.0,1150.0
+P-685,"Em uma árvore com n vértices, responda consultas de menor ancestral comum (LCA) usando binary lifting. Limite: 1 <= n <= 10^5.",2.0,1900.0
+P-604,Leia dois inteiros a e b e imprima a soma simples dos dois números. 1 <= n <= 100.,1.0,800.0
+P-343,"Processe q consultas offline em uma matriz grid n por m usando Fenwick tree e árvore de segmentos. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2300.0
+P-662,Encontre o menor valor x para dividir o vetor em k blocos usando busca binária na resposta monótona. Limite: 1 <= n <= 10^5.,2.0,1300.0
+P-289,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 100.,2.0,800.0
+P-575,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 10^{18}.,4.0,2500.0
+P-610,Use FFT/NTT para multiplicar polinômios em árvore com centroid decomposition módulo 998244353. Limite: 1 <= n <= 20.,2.5,2550.0
+P-158,Calcule os números primos no intervalo usando crivo e mdc. Limite: 1 <= n <= 2 * 10^5.,1.0,1300.0
+P-574,"Dado um grafo com árvore enraizada, responda q consultas em subárvore com programação dinâmica e lazy propagation. 1 <= n, q <= 2 * 10^5.",2.0,2350.0
+P-660,"Given two integers a and b, print their sum a + b. Constraints: 1 <= n <= 10^5.",1.0,850.0
+P-352,"Calcule a soma simples dos elementos de um array e imprima o total. 1 <= a, b <= 1000.",2.0,950.0
+P-121,Conte quantas vogais existem na palavra informada e imprima o resultado. 1 <= n <= 10^5.,1.0,900.0
+P-413,"Mantenha uma segment tree com lazy propagation para atualizar intervalos e consultar o máximo em [l, r]. Limite: 1 <= n, q <= 2 * 10^5.",3.0,2300.0
+P-559,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.0,1950.0
+P-260,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 10^9.,4.0,2550.0
+P-376,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.5,1600.0
+P-291,Ordene a permutação minimizando o custo de trocas adjacentes com estratégia gulosa. Limite: 1 <= n <= 2 * 10^5.,2.0,1400.0
+P-485,Calcule o fatorial de um número inteiro pequeno n. Limite: 1 <= n <= 12.,1.0,800.0
+P-513,"Leia três notas, calcule a média simples e imprima o maior valor. 1 <= a, b <= 1000.",1.0,950.0
+P-591,Ordene o vetor de n inteiros e conte a frequência de cada valor no mapa. 1 <= n <= 10^5.,1.0,1200.0
+P-443,"Dado um array de n inteiros, conte quantos elementos são pares. 1 <= n <= 10^5.",1.0,850.0
+P-408,Calcule a soma simples dos elementos de um array e imprima o total. 1 <= n <= 100.,2.0,850.0
+P-230,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2000.0
+P-199,Simule a fila de atendimento e processe os eventos na ordem de chegada. 1 <= n <= 10^5.,2.0,1050.0
+P-472,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 2 * 10^5.",1.0,1000.0
+P-187,"Conte subsequências válidas de tamanho k módulo 10^9 + 7 usando programação dinâmica e knapsack (mochila). Limite: 1 <= n, m <= 10^5.",2.0,1800.0
+P-558,"Dada uma malha de cidades e estradas com pesos, calcule o caminho mínimo com Dijkstra e fila de prioridade. Limite: 1 <= n, m <= 10^5.",2.5,1600.0
+P-430,Use soma de prefixos e dois ponteiros para achar a janela deslizante. 1 <= n <= 1000.,2.0,950.0
+P-314,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 2 * 10^5.,2.5,1850.0
+P-566,Conte ocorrências de padrões usando trie e kmp sobre strings. Limite: 1 <= n <= 10^5.,2.5,2050.0
+P-221,Minimize the maximum distance between stations using binary search on the answer and greedy check. Constraints: 1 <= n <= 2 * 10^5.,2.0,1350.0
+P-120,Calcule o fluxo máximo e corte mínimo com Dinic e heavy-light decomposition HLD na árvore. Limite: 1 <= n <= 10^{18}.,2.5,2500.0
+P-171,"Dado um vetor de preços, use janela deslizante para achar o maior lucro. 1 <= n <= 2 * 10^5.",1.0,1150.0
+P-206,Use uma pilha (stack) para verificar se a sequência de parênteses está balanceada. 1 <= n <= 1000.,1.0,1000.0
+P-370,Calcule o conjunto independente máximo usando programação dinâmica em árvore enraizada. Limite: 1 <= n <= 10^5.,2.5,1900.0
+P-535,Sort the array and use two pointers to find pairs with target sum. 1 <= n <= 2 * 10^5.,2.0,1050.0
+P-202,"Dado um grafo ponderado e programação dinâmica sobre subconjuntos, calcule o custo mínimo de conexão. Limite: 1 <= n <= 2 * 10^5.",2.5,2000.0

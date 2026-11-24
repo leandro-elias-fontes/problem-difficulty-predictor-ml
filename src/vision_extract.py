@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 
 _SUPPORTED_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".bmp"}
@@ -26,6 +27,14 @@ class ExtractedProblem:
     time_limit: float = 2.0
 
 
+@lru_cache(maxsize=1)
+def _get_ocr_engine() -> object:
+    """Inicializa e reutiliza o motor RapidOCR em memoria."""
+    from rapidocr_onnxruntime import RapidOCR
+
+    return RapidOCR()
+
+
 def _validate_image_path(image_path: Path) -> None:
     if not image_path.exists():
         raise FileNotFoundError(f"Imagem nao encontrada: {image_path}")
@@ -37,14 +46,19 @@ def extract_text_from_image(image_path: Path) -> str:
     """Executa OCR local 100% offline usando RapidOCR (ONNX Runtime)."""
     _validate_image_path(image_path)
 
-    from rapidocr_onnxruntime import RapidOCR
+    engine = _get_ocr_engine()
+    try:
+        result, _ = engine(str(image_path))
+    except Exception as exc:
+        raise ValueError(
+            "Nao foi possivel ler a imagem. Verifique se o arquivo PNG/JPG/WEBP e valido."
+        ) from exc
 
-    engine = RapidOCR()
-    result, _ = engine(str(image_path))
     if not result:
         return ""
     lines = [str(item[1]).strip() for item in result if len(item) >= 2 and str(item[1]).strip()]
-    return "\n".join(lines)
+    joined = "\n".join(lines)
+    return re.sub(r"10\s*\^\s*(\d+)", r"10^\1", joined)
 
 
 def _extract_time_limit(text: str, default: float = 2.0) -> float:
