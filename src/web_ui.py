@@ -5,7 +5,7 @@ LOGIN_PAGE = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Acesso Restrito — UberHub Calibrador</title>
+  <title>Acesso Restrito — Calibrador de Questões</title>
   <style>
     :root {
       --bg: #f7f6f2;
@@ -89,7 +89,7 @@ LOGIN_PAGE = """<!DOCTYPE html>
 </head>
 <body>
   <form class="login-card" onsubmit="doLogin(event)">
-    <span class="tag">UberHub Code Club</span>
+    <span class="tag">Listas & Maratonas</span>
     <h1>Acesso para Instrutores</h1>
     <p>Digite a senha da equipe para acessar o Calibrador de Questões.</p>
     <label for="pwd">Senha de acesso</label>
@@ -603,7 +603,7 @@ HTML_PAGE = """<!DOCTYPE html>
     <header class="topbar">
       <div class="brand">
         <h1 class="wordmark">Calibrador de Questões</h1>
-        <span class="pill-tag">UberHub Code Club</span>
+        <span class="pill-tag">Listas & Maratonas</span>
       </div>
       <div style="display:flex;align-items:center;gap:0.5rem;flex-shrink:0">
         <label class="toggle-wrap">

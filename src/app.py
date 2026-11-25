@@ -18,7 +18,7 @@ from pydantic import BaseModel, Field
 
 from src.dataset import clean_text
 from src.predict import predict_rating
-from src.semantic_model import rating_to_uberhub_track
+from src.semantic_model import rating_to_track
 from src.url_fetcher import lookup_problem_by_url, match_known_problem_by_text
 from src.vision_extract import extract_problems_from_image
 from src.web_ui import HTML_PAGE, LOGIN_PAGE
@@ -26,11 +26,11 @@ from src.web_ui import HTML_PAGE, LOGIN_PAGE
 FEEDBACK_PATH = Path("data/feedback.jsonl")
 _RATE_WINDOW_SEC = 60.0
 _IP_HITS: dict[str, deque[float]] = defaultdict(deque)
-_SESSION_COOKIE = "uberhub_session"
+_SESSION_COOKIE = "calibrador_session"
 _SESSION_TTL_SEC = 60 * 60 * 24 * 7  # 7 dias
 
 app = FastAPI(
-    title="Calibrador de Questoes - UberHub Code Club",
+    title="Calibrador de Questoes - Maratona",
     description="Previsao de Rating (800-3000) de problemas de maratona com XGBoost + PyTorch.",
     version="0.4.0",
 )
@@ -41,7 +41,7 @@ def _get_access_password() -> str:
 
 
 def _sign_session(password: str, issued_at: int) -> str:
-    secret = hashlib.sha256(f"uberhub-calibrador:{password}".encode()).digest()
+    secret = hashlib.sha256(f"calibrador-maratona:{password}".encode()).digest()
     msg = str(issued_at).encode()
     sig = hmac.new(secret, msg, hashlib.sha256).hexdigest()
     return f"{issued_at}.{sig}"
@@ -190,7 +190,7 @@ def api_predict_text(payload: TextPredictRequest) -> dict[str, object]:
         )
     official = match_known_problem_by_text(cleaned)
     if official is not None:
-        track_info = rating_to_uberhub_track(int(official["rating"]))
+        track_info = rating_to_track(int(official["rating"]))
         return {
             **official,
             "track": track_info["track"],
@@ -215,7 +215,7 @@ def api_predict_url(payload: UrlPredictRequest) -> dict[str, object]:
 
     if info.get("mode") == "official":
         rating = int(info["rating"])
-        track_info = rating_to_uberhub_track(rating)
+        track_info = rating_to_track(rating)
         return {
             **info,
             "track": track_info["track"],
@@ -247,7 +247,7 @@ def api_analyze_batch(payload: BatchAnalyzeRequest) -> dict[str, object]:
                 info = lookup_problem_by_url(entry)
                 if info.get("mode") == "official":
                     rating = int(info["rating"])
-                    track_info = rating_to_uberhub_track(rating)
+                    track_info = rating_to_track(rating)
                     results.append(
                         {
                             **info,
@@ -351,7 +351,7 @@ async def api_predict_image(
     for prob in problems:
         official = match_known_problem_by_text(prob.statement_text)
         if official is not None:
-            track_info = rating_to_uberhub_track(int(official["rating"]))
+            track_info = rating_to_track(int(official["rating"]))
             pred = {
                 **official,
                 "track": track_info["track"],

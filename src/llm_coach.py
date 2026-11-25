@@ -168,7 +168,7 @@ def analyze_with_local_llm(
             api_key=openrouter_key,
             model_name=os.getenv("OPENROUTER_MODEL", "meta-llama/llama-3.3-70b-instruct:free"),
             prompt=prompt,
-            extra_headers={"X-Title": "Calibrador de Questoes UberHub"},
+            extra_headers={"X-Title": "Calibrador de Questoes"},
         )
         if res is not None:
             return {**res, "provider": "OpenRouter (Free)"}

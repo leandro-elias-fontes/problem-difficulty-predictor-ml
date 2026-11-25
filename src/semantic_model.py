@@ -67,8 +67,8 @@ TAG_PT_MAP: dict[str, str] = {
 }
 
 
-def rating_to_uberhub_track(rating: float) -> dict[str, str]:
-    """Mapeia o rating para as turmas e trilhas do UberHub Code Club."""
+def rating_to_track(rating: float) -> dict[str, str]:
+    """Mapeia o rating para faixas de treino, turmas e posicao sugerida na lista."""
     if rating < 1150:
         return {
             "level": "Iniciante",
@@ -435,7 +435,7 @@ def predict_semantic(
     rounded = int(round(ens_pred / 50.0) * 50)
     spread = float(np.std([xgb_pred, ridge_pred, mlp_pred]))
     confidence = "Alta" if spread <= 110 else ("Média" if spread <= 220 else "Baixa")
-    track_info = rating_to_uberhub_track(rounded)
+    track_info = rating_to_track(rounded)
 
     return {
         "rating": rounded,

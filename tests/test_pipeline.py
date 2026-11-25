@@ -346,7 +346,7 @@ def test_access_password_auth(monkeypatch: pytest.MonkeyPatch) -> None:
     from src.app import _IP_HITS, app
 
     _IP_HITS.clear()
-    monkeypatch.setenv("ACCESS_PASSWORD", "uberhub-segredo")
+    monkeypatch.setenv("ACCESS_PASSWORD", "equipe-segredo")
     client = TestClient(app)
 
     # Healthcheck continua publico para o Render
@@ -365,9 +365,9 @@ def test_access_password_auth(monkeypatch: pytest.MonkeyPatch) -> None:
     assert client.post("/api/login", json={"password": "errada"}).status_code == 401
 
     # Senha certa libera sessao
-    ok_resp = client.post("/api/login", json={"password": "uberhub-segredo"})
+    ok_resp = client.post("/api/login", json={"password": "equipe-segredo"})
     assert ok_resp.status_code == 200
-    assert "uberhub_session" in client.cookies
+    assert "calibrador_session" in client.cookies
 
     home = client.get("/")
     assert "Calibrador de Questões" in home.text

@@ -22,7 +22,7 @@ from src.llm_coach import analyze_with_local_llm
 from src.semantic_model import (
     SEMANTIC_ARTIFACTS_DIR,
     predict_semantic,
-    rating_to_uberhub_track,
+    rating_to_track,
     semantic_artifacts_available,
 )
 from src.train import RatingMLP, train_and_evaluate
@@ -139,7 +139,7 @@ def predict_rating(
             if llm_res is not None:
                 blended = 0.65 * float(llm_res["llm_rating"]) + 0.35 * float(sem_rating)
                 final_rating = int(round(blended / 50.0) * 50)
-                track_info = rating_to_uberhub_track(final_rating)
+                track_info = rating_to_track(final_rating)
                 merged_topics: list[str] = []
                 for t in [*list(llm_res["topics"]), *sem_topics]:
                     if t not in merged_topics:
@@ -195,7 +195,7 @@ def predict_rating(
     if llm_res is not None:
         blended = 0.65 * float(llm_res["llm_rating"]) + 0.35 * float(rounded)
         rounded = int(round(blended / 50.0) * 50)
-        track_info = rating_to_uberhub_track(rounded)
+        track_info = rating_to_track(rounded)
         merged_topics: list[str] = []
         for t in [*list(llm_res["topics"]), *base_topics]:
             if t not in merged_topics:
@@ -221,7 +221,7 @@ def predict_rating(
             "similar_problems": [],
         }
 
-    track_info = rating_to_uberhub_track(rounded)
+    track_info = rating_to_track(rounded)
     return {
         "rating": rounded,
         "level": rating_to_level(rounded),

@@ -1,4 +1,4 @@
-# Calibrador de Questões — UberHub Code Club
+# Calibrador de Questões — Listas & Maratonas
 
 Classificador profissional de dificuldade e tópicos para auxiliar instrutores e monitores na montagem de listas e provas (NEPS, Beecrowd, Codeforces e AtCoder).
 
