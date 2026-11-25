@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import html
+import ipaddress
 import re
+import socket
 from functools import lru_cache
+from urllib.parse import urljoin, urlparse
 
 import httpx
 
@@ -162,6 +165,64 @@ def match_known_problem_by_text(text: str) -> dict[str, object] | None:
     return None
 
 
+def _validate_public_url(url: str) -> str:
+    """Valida URL contra SSRF: exige http/https e bloqueia IPs privados/loopback/internos."""
+    parsed = urlparse(url.strip())
+    if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+        raise ValueError("Informe uma URL valida comecando com https://")
+
+    host = parsed.hostname.lower().strip(".")
+    if host in {"localhost", "localhost.localdomain"} or host.endswith(
+        (".local", ".internal", ".localhost")
+    ):
+        raise ValueError("Host local ou interno nao permitido por seguranca.")
+
+    try:
+        addr_info = socket.getaddrinfo(
+            host, parsed.port or (443 if parsed.scheme == "https" else 80)
+        )
+    except socket.gaierror as exc:
+        raise ValueError("Nao foi possivel resolver o dominio informado.") from exc
+
+    for _, _, _, _, sockaddr in addr_info:
+        ip_str = str(sockaddr[0]).split("%")[0]
+        ip_obj = ipaddress.ip_address(ip_str)
+        if (
+            ip_obj.is_private
+            or ip_obj.is_loopback
+            or ip_obj.is_link_local
+            or ip_obj.is_multicast
+            or ip_obj.is_reserved
+            or ip_obj.is_unspecified
+        ):
+            raise ValueError("Endereco IP privado ou reservado nao permitido por seguranca.")
+
+    return parsed.geturl()
+
+
+def _safe_fetch_public_html(url: str) -> str:
+    """Faz GET seguro em URL publica com validacao anti-SSRF por salto e limite de tamanho."""
+    current_url = _validate_public_url(url)
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; CalibradorQuestoes/1.0)"}
+
+    with httpx.Client(timeout=10.0, follow_redirects=False, headers=headers) as client:
+        for _ in range(3):
+            resp = client.get(current_url)
+            if resp.status_code in {301, 302, 303, 307, 308} and "location" in resp.headers:
+                next_url = urljoin(current_url, resp.headers["location"])
+                current_url = _validate_public_url(next_url)
+                continue
+            if resp.status_code >= 400:
+                raise ValueError(
+                    "Este site bloqueou a leitura automatica do link. "
+                    "Tire um print da questao e pressione Ctrl+V na aba 'Print', "
+                    "ou copie e cole o enunciado."
+                )
+            return resp.text[:512_000]
+
+    raise ValueError("Muitos redirecionamentos ao tentar acessar este link.")
+
+
 def _strip_html_to_text(raw_html: str) -> str:
     cleaned = re.sub(r"<(script|style|noscript)[^>]*>.*?</\1>", " ", raw_html, flags=re.S | re.I)
     cleaned = re.sub(r"<[^>]+>", " ", cleaned)
@@ -171,9 +232,7 @@ def _strip_html_to_text(raw_html: str) -> str:
 
 def lookup_problem_by_url(url: str) -> dict[str, object]:
     """Consulta metadados oficiais (Codeforces/AtCoder) ou extrai texto de link publico."""
-    clean_url = url.strip()
-    if not clean_url.startswith(("http://", "https://")):
-        raise ValueError("Informe uma URL valida comecando com https://")
+    clean_url = _validate_public_url(url)
 
     # 1. Codeforces (oficial via API)
     cf_match = _CF_URL_RE.search(clean_url)
@@ -243,21 +302,14 @@ def lookup_problem_by_url(url: str) -> dict[str, object]:
             "max_n_log10": 0.0,
         }
 
-    # 3. Outros sites publicos (NEPS, Beecrowd, etc.) -> tenta ler texto para rodar ML
+    # 3. Outros sites publicos (NEPS, Beecrowd, etc.) -> leitura segura anti-SSRF
     try:
-        headers = {"User-Agent": "Mozilla/5.0 (compatible; CalibradorQuestoes/1.0)"}
-        resp = httpx.get(clean_url, headers=headers, timeout=12.0, follow_redirects=True)
-        if resp.status_code >= 400:
-            raise ValueError(
-                "Este site bloqueou a leitura automatica do link. "
-                "Tire um print da questao e pressione Ctrl+V na aba 'Print / Imagem', "
-                "ou copie e cole o enunciado."
-            )
-        title_match = re.search(r"<title[^>]*>(.*?)</title>", resp.text, flags=re.S | re.I)
+        raw_html = _safe_fetch_public_html(clean_url)
+        title_match = re.search(r"<title[^>]*>(.*?)</title>", raw_html, flags=re.S | re.I)
         page_title = (
             html.unescape(title_match.group(1)).strip() if title_match else "Questão via Link"
         )
-        text = _strip_html_to_text(resp.text)
+        text = _strip_html_to_text(raw_html)
 
         if _BEECROWD_URL_RE.search(clean_url):
             lvl_m = re.search(r"N[ií]vel\s+(\d+)|Level\s+(\d+)", text, re.I)

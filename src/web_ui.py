@@ -8,61 +8,79 @@ HTML_PAGE = """<!DOCTYPE html>
   <title>Calibrador de Questões — Listas & Maratonas</title>
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #f7f6f2;
       --surface: #ffffff;
-      --surface-alt: #f1f5f9;
-      --border: #e2e8f0;
-      --text: #0f172a;
-      --muted: #64748b;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --primary-soft: #eff6ff;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
-      --radius: 14px;
+      --surface-alt: #efede7;
+      --border: #dcd8ce;
+      --text: #14181f;
+      --muted: #4b5563;
+      --primary: #0f4c81;
+      --primary-hover: #0b3a63;
+      --primary-soft: #e8f1f8;
+      --success: #15803d;
+      --danger: #b91c1c;
+      --shadow: 0 1px 2px rgba(20, 24, 31, 0.05), 0 6px 16px rgba(20, 24, 31, 0.04);
+      --radius: 12px;
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
     }
     * { box-sizing: border-box; }
-    body {
+    html, body {
       margin: 0;
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: var(--font-sans);
+      font-size: 15px;
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
     }
-    .page { max-width: 1120px; margin: 0 auto; padding: 1.75rem 1.25rem 3rem; }
-    header {
+    code { font-family: var(--font-mono); font-size: 0.85em; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 1.25rem 1.25rem 3rem; }
+    .topbar {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
     }
-    .brand { display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; }
-    h1 { font-size: 1.6rem; font-weight: 800; margin: 0; letter-spacing: -0.02em; }
+    .brand { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+    .wordmark {
+      font-size: 1.375rem;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.025em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .pill-tag {
       background: var(--primary-soft);
       color: var(--primary);
-      font-size: 0.75rem;
+      font-size: 0.8125rem;
       font-weight: 700;
-      padding: 0.2rem 0.6rem;
+      padding: 0.18rem 0.6rem;
       border-radius: 999px;
-      border: 1px solid #bfdbfe;
+      border: 1px solid #bfd7ec;
+      white-space: nowrap;
     }
-    .subtitle { color: var(--muted); margin: 0.25rem 0 0; font-size: 0.95rem; }
     .toggle-wrap {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--muted);
+      gap: 0.45rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text);
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 0.45rem 0.8rem;
+      padding: 0.4rem 0.75rem;
       border-radius: 999px;
       cursor: pointer;
       user-select: none;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .toggle-wrap input { accent-color: var(--primary); cursor: pointer; }
 
@@ -80,6 +98,7 @@ HTML_PAGE = """<!DOCTYPE html>
       border-radius: var(--radius);
       padding: 1.35rem;
       box-shadow: var(--shadow);
+      min-width: 0;
     }
     .card-title {
       font-size: 1rem;
@@ -88,6 +107,7 @@ HTML_PAGE = """<!DOCTYPE html>
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 0.5rem;
     }
 
@@ -100,10 +120,11 @@ HTML_PAGE = """<!DOCTYPE html>
       margin-bottom: 1rem;
       gap: 0.25rem;
     }
-    @media (max-width: 560px) {
-      .page { padding: 1rem 0.85rem 2.5rem; }
+    @media (max-width: 680px) {
+      .page { padding: 0.9rem 0.85rem 2.25rem; }
       .card { padding: 1rem; }
-      h1 { font-size: 1.35rem; }
+      .wordmark { font-size: 1.15rem; }
+      .pill-tag { display: none; }
       .segmented { grid-template-columns: 1fr 1fr; }
       .row { grid-template-columns: 1fr; gap: 0; }
       textarea, input[type="text"], input[type="number"] { font-size: 16px; }
@@ -454,19 +475,14 @@ HTML_PAGE = """<!DOCTYPE html>
 </head>
 <body>
   <div class="page">
-    <header>
-      <div>
-        <div class="brand">
-          <h1>Calibrador de Questões</h1>
-          <span class="pill-tag">UberHub Code Club</span>
-        </div>
-        <p class="subtitle">
-          Classificador profissional para instrutores e monitores calibrarem listas do NEPS, Beecrowd, Codeforces e AtCoder.
-        </p>
+    <header class="topbar">
+      <div class="brand">
+        <h1 class="wordmark">Calibrador de Questões</h1>
+        <span class="pill-tag">UberHub Code Club</span>
       </div>
       <label class="toggle-wrap">
         <input type="checkbox" id="tech-toggle" onchange="toggleTechMode()" />
-        <span>Modo técnico (ML)</span>
+        <span>Modo técnico</span>
       </label>
     </header>
 

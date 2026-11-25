@@ -3,12 +3,15 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
+import time
+from collections import defaultdict, deque
 from datetime import datetime, timezone
 from pathlib import Path
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
 from src.dataset import clean_text
@@ -19,26 +22,56 @@ from src.vision_extract import extract_problems_from_image
 from src.web_ui import HTML_PAGE
 
 FEEDBACK_PATH = Path("data/feedback.jsonl")
+_RATE_WINDOW_SEC = 60.0
+_IP_HITS: dict[str, deque[float]] = defaultdict(deque)
 
 app = FastAPI(
-    title="Calibrador de Questoes - Maratona",
+    title="Calibrador de Questoes - UberHub Code Club",
     description="Previsao de Rating (800-3000) de problemas de maratona com XGBoost + PyTorch.",
-    version="0.3.0",
+    version="0.4.0",
 )
+
+
+@app.middleware("http")
+async def security_and_rate_limit_middleware(request: Request, call_next: object) -> object:
+    """Aplica headers de seguranca e rate limit leve por IP nos endpoints /api/*."""
+    if request.url.path.startswith("/api/"):
+        limit = int(os.getenv("RATE_LIMIT_PER_MIN", "60"))
+        if limit > 0:
+            client_ip = request.headers.get("x-forwarded-for", "").split(",")[0].strip() or (
+                request.client.host if request.client else "unknown"
+            )
+            now = time.monotonic()
+            hits = _IP_HITS[client_ip]
+            while hits and now - hits[0] > _RATE_WINDOW_SEC:
+                hits.popleft()
+            if len(hits) >= limit:
+                return JSONResponse(
+                    status_code=429,
+                    content={"detail": "Muitas requisicoes. Aguarde alguns segundos."},
+                )
+            hits.append(now)
+
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    return response
 
 
 class TextPredictRequest(BaseModel):
     """Payload JSON para previsao via texto."""
 
-    statement: str = Field(..., min_length=3)
-    n_limit: str | None = None
+    statement: str = Field(..., min_length=3, max_length=10_000)
+    n_limit: str | None = Field(default=None, max_length=60)
     time_limit: float = Field(default=2.0, gt=0.0, le=30.0)
 
 
 class UrlPredictRequest(BaseModel):
     """Payload JSON para previsao/consulta via link."""
 
-    url: str = Field(..., min_length=8)
+    url: str = Field(..., min_length=8, max_length=500)
 
 
 class FeedbackRequest(BaseModel):
@@ -46,8 +79,8 @@ class FeedbackRequest(BaseModel):
 
     rating: int = Field(..., ge=800, le=3500)
     verdict: str = Field(..., pattern="^(ok|too_high|too_low)$")
-    title: str = ""
-    statement_preview: str = ""
+    title: str = Field(default="", max_length=120)
+    statement_preview: str = Field(default="", max_length=300)
 
 
 class BatchAnalyzeRequest(BaseModel):

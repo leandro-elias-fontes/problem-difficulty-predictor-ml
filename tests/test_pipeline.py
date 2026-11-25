@@ -298,3 +298,42 @@ def test_llm_coach_json_parsing_and_blend(monkeypatch: pytest.MonkeyPatch) -> No
     assert res["algorithm"] == "Dijkstra"
     assert res["complexity"] == "O(M log N)"
     assert 800 <= int(res["rating"]) <= 3000
+
+
+def test_security_headers_ssrf_and_rate_limit(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Valida headers de seguranca, bloqueio anti-SSRF, payload e rate limit."""
+    from fastapi.testclient import TestClient
+
+    from src.app import _IP_HITS, app
+    from src.url_fetcher import _validate_public_url
+
+    _IP_HITS.clear()
+    client = TestClient(app)
+
+    home = client.get("/")
+    assert home.status_code == 200
+    assert home.headers["x-content-type-options"] == "nosniff"
+    assert home.headers["x-frame-options"] == "DENY"
+    assert home.headers["referrer-policy"] == "strict-origin-when-cross-origin"
+
+    for bad_url in (
+        "http://127.0.0.1:8000/health",
+        "http://localhost/admin",
+        "http://169.254.169.254/latest/meta-data/",
+        "ftp://example.com/file",
+    ):
+        with pytest.raises(ValueError):
+            _validate_public_url(bad_url)
+
+    ssrf_resp = client.post("/api/predict-url", json={"url": "http://127.0.0.1:8000/health"})
+    assert ssrf_resp.status_code == 400
+
+    blank_resp = client.post("/api/predict-text", json={"statement": "   "})
+    assert blank_resp.status_code == 400
+
+    monkeypatch.setenv("RATE_LIMIT_PER_MIN", "2")
+    _IP_HITS.clear()
+    assert client.post("/api/feedback", json={"rating": 1200, "verdict": "ok"}).status_code == 200
+    assert client.post("/api/feedback", json={"rating": 1200, "verdict": "ok"}).status_code == 200
+    assert client.post("/api/feedback", json={"rating": 1200, "verdict": "ok"}).status_code == 429
+    _IP_HITS.clear()
