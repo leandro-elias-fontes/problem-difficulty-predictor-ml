@@ -17,6 +17,7 @@ from src.features import (
     extract_detected_topics,
     extract_max_n_log10,
 )
+from src.llm_coach import analyze_with_local_llm
 from src.semantic_model import (
     SEMANTIC_ARTIFACTS_DIR,
     predict_semantic,
@@ -105,18 +106,56 @@ def predict_rating(
     n_display = _format_n_display(max_n_log10)
 
     sem_dir = artifacts_dir / "semantic"
-    if semantic_artifacts_available(sem_dir):
-        sem_res = predict_semantic(full_statement, feat_df, out_dir=sem_dir)
-        return {
-            **sem_res,
-            "max_n_log10": max_n_log10,
-            "n_display": n_display,
-        }
+    active_sem_dir = (
+        sem_dir
+        if semantic_artifacts_available(sem_dir)
+        else (
+            SEMANTIC_ARTIFACTS_DIR
+            if artifacts_dir == Path("artifacts")
+            and semantic_artifacts_available(SEMANTIC_ARTIFACTS_DIR)
+            else None
+        )
+    )
+    if active_sem_dir is not None:
+        sem_res = predict_semantic(full_statement, feat_df, out_dir=active_sem_dir)
+        sem_rating = int(sem_res["rating"])
+        sem_topics = list(sem_res["topics"])
 
-    if artifacts_dir == Path("artifacts") and semantic_artifacts_available(SEMANTIC_ARTIFACTS_DIR):
-        sem_res = predict_semantic(full_statement, feat_df, out_dir=SEMANTIC_ARTIFACTS_DIR)
+        llm_res = analyze_with_local_llm(
+            statement=full_statement,
+            n_display=n_display,
+            time_limit=float(time_limit),
+            semantic_rating=sem_rating,
+            semantic_topics=sem_topics,
+        )
+        if llm_res is not None:
+            blended = 0.65 * float(llm_res["llm_rating"]) + 0.35 * float(sem_rating)
+            final_rating = int(round(blended / 50.0) * 50)
+            track_info = rating_to_uberhub_track(final_rating)
+            merged_topics: list[str] = []
+            for t in [*list(llm_res["topics"]), *sem_topics]:
+                if t not in merged_topics:
+                    merged_topics.append(t)
+            return {
+                **sem_res,
+                "rating": final_rating,
+                "level": track_info["level"],
+                "track": track_info["track"],
+                "slot": track_info["slot"],
+                "guidance": track_info["guidance"],
+                "topics": merged_topics[:4],
+                "llm_rating": llm_res["llm_rating"],
+                "algorithm": llm_res["algorithm"],
+                "complexity": llm_res["complexity"],
+                "mentor_tip": llm_res["mentor_tip"],
+                "ai_engine": "Qwen2.5-Coder-3B (Local) + Ensemble",
+                "max_n_log10": max_n_log10,
+                "n_display": n_display,
+            }
+
         return {
             **sem_res,
+            "ai_engine": "MiniLM + Ensemble",
             "max_n_log10": max_n_log10,
             "n_display": n_display,
         }

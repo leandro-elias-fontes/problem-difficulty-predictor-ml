@@ -325,6 +325,26 @@ HTML_PAGE = """<!DOCTYPE html>
       font-size: 0.84rem;
       margin-bottom: 0.75rem;
     }
+    .spinner {
+      width: 34px;
+      height: 34px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      margin: 0 auto 0.75rem;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .coach-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.86rem;
+      color: #14532d;
+    }
+    .coach-box strong { color: #166534; }
     .guidance {
       background: var(--primary-soft);
       border-left: 3px solid var(--primary);
@@ -732,6 +752,13 @@ HTML_PAGE = """<!DOCTYPE html>
 
             ${item.guidance ? `<div class="guidance">${escapeHtml(item.guidance)}</div>` : ''}
 
+            ${(item.algorithm || item.complexity || item.mentor_tip) ? `
+              <div class="coach-box">
+                ${item.algorithm ? `<div><strong>🧠 Técnica esperada:</strong> ${escapeHtml(item.algorithm)} ${item.complexity ? `<code>(${escapeHtml(item.complexity)})</code>` : ''}</div>` : ''}
+                ${item.mentor_tip ? `<div style="margin-top:0.3rem"><strong>💡 Dica para monitoria:</strong> ${escapeHtml(item.mentor_tip)}</div>` : ''}
+              </div>
+            ` : ''}
+
             <div class="signals">
               ${topicsHtml}
               <span class="signal-chip">📏 ${escapeHtml(item.n_display || 'N não informado')}</span>
@@ -772,6 +799,8 @@ HTML_PAGE = """<!DOCTYPE html>
             ` : ''}
 
             <div class="tech-details ${showTech ? '' : 'hidden'}">
+              ${item.ai_engine ? `Motor: <b>${escapeHtml(item.ai_engine)}</b> • ` : ''}
+              ${item.llm_rating ? `LLM Local: <b>${item.llm_rating}</b> • ` : ''}
               XGBoost: <b>${item.xgb_rating}</b> • PyTorch MLP: <b>${item.mlp_rating}</b> • log10(N): <b>${item.max_n_log10}</b>
             </div>
           </div>
@@ -882,7 +911,12 @@ HTML_PAGE = """<!DOCTYPE html>
         return;
       }
       btn.disabled = true;
-      document.getElementById('results').innerHTML = `<div class="empty-state">Analisando ${lines.length} questões da lista...</div>`;
+      document.getElementById('results').innerHTML = `
+        <div class="empty-state">
+          <div class="spinner"></div>
+          <strong>Analisando ${lines.length} questões da lista...</strong>
+          <p style="margin:0.35rem 0 0">Pode deixar carregando e voltar em instantes — questões inéditas passam pela IA local.</p>
+        </div>`;
       try {
         const resp = await fetch('/api/analyze-batch', {
           method: 'POST',
@@ -962,7 +996,12 @@ HTML_PAGE = """<!DOCTYPE html>
         return;
       }
       btn.disabled = true;
-      document.getElementById('results').innerHTML = '<div class="empty-state">Analisando enunciado e restrições...</div>';
+      document.getElementById('results').innerHTML = `
+        <div class="empty-state">
+          <div class="spinner"></div>
+          <strong>Analisando com Coach IA Local...</strong>
+          <p style="margin:0.35rem 0 0">Lendo restrições e raciocinando sobre a complexidade (~10–20s).</p>
+        </div>`;
       try {
         const timeLimit = parseFloat(document.getElementById('time-limit').value) || 2.0;
         const resp = await fetch('/api/predict-text', {
@@ -993,7 +1032,12 @@ HTML_PAGE = """<!DOCTYPE html>
       }
       const btn = document.getElementById('btn-image');
       btn.disabled = true;
-      document.getElementById('results').innerHTML = '<div class="empty-state">Lendo texto da imagem offline (OCR)...</div>';
+      document.getElementById('results').innerHTML = `
+        <div class="empty-state">
+          <div class="spinner"></div>
+          <strong>Lendo print e analisando com IA Local...</strong>
+          <p style="margin:0.35rem 0 0">Extraindo texto offline (OCR) e calibrando dificuldade.</p>
+        </div>`;
       try {
         const form = new FormData();
         form.append('file', file, file.name || 'print.png');

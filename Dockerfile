@@ -17,8 +17,10 @@ COPY artifacts/ ./artifacts/
 COPY data/ ./data/
 
 RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu \
     && pip install --no-cache-dir . \
-    && python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')"
+    && python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')" \
+    && python -c "from huggingface_hub import hf_hub_download; hf_hub_download(repo_id='Qwen/Qwen2.5-Coder-3B-Instruct-GGUF', filename='qwen2.5-coder-3b-instruct-q4_k_m.gguf')"
 
 EXPOSE 7860
 

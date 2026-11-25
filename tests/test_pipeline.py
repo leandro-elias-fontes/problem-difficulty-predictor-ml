@@ -161,6 +161,7 @@ def test_fastapi_web_endpoints(monkeypatch: pytest.MonkeyPatch) -> None:
     from src.vision_extract import ExtractedProblem
 
     client = TestClient(app)
+    monkeypatch.setenv("ENABLE_LOCAL_LLM", "0")
     assert client.get("/").status_code == 200
     assert client.get("/health").json() == {"status": "ok"}
 
@@ -272,3 +273,25 @@ def test_match_known_problem_by_text(monkeypatch: pytest.MonkeyPatch) -> None:
     by_title = match_known_problem_by_text("A. Watermelon\nOne hot summer day...")
     assert by_title is not None
     assert by_title["rating"] == 800
+
+
+def test_llm_coach_json_parsing_and_blend(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Valida parser JSON do Coach IA local e integracao com predict_rating."""
+    from src.llm_coach import _parse_llm_json
+    from src.predict import predict_rating
+
+    parsed = _parse_llm_json(
+        '```json\n{"rating": 1620, "algorithm": "Dijkstra", '
+        '"complexity": "O(M log N)", "topics": ["Grafos"], '
+        '"mentor_tip": "Modele as cidades como grafo."}\n```'
+    )
+    assert parsed is not None
+    assert parsed["llm_rating"] == 1600
+    assert parsed["algorithm"] == "Dijkstra"
+
+    monkeypatch.setattr("src.predict.analyze_with_local_llm", lambda **_: parsed)
+    res = predict_rating("Um carteiro precisa ir da cidade 1 até N.", n_limit="10^5")
+    assert res["ai_engine"] == "Qwen2.5-Coder-3B (Local) + Ensemble"
+    assert res["algorithm"] == "Dijkstra"
+    assert res["complexity"] == "O(M log N)"
+    assert 800 <= int(res["rating"]) <= 3000

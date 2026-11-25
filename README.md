@@ -13,6 +13,7 @@ Classificador profissional de dificuldade e tópicos para auxiliar instrutores e
 
 ## Recursos Principais
 
+- **Coach IA Local Open-Source (`Qwen2.5-Coder-3B-Instruct` GGUF)**: roda 100% dentro do próprio Docker via `llama-cpp-python` (zero API key, zero custo), raciocinando sobre algoritmo esperado, complexidade de tempo (`O(N log N)`) e dica pedagógica para monitoria.
 - **Modelo Semântico Multilíngue (PT-BR + EN)**: treinado com **8.619 problemas reais** usando `paraphrase-multilingual-MiniLM-L12-v2`, classificador multi-label de **18 tópicos**, ensemble (`XGBoost` + `Ridge` + `PyTorch MLP`) e busca **k-NN** das 3 questões reais mais parecidas do Codeforces.
 - **4 Modos de Uso na Interface Web**:
   - **Texto**: enunciado + presets de limite `N`.
