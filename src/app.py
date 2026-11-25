@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import hmac
 import json
 import os
 import tempfile
@@ -19,11 +21,13 @@ from src.predict import predict_rating
 from src.semantic_model import rating_to_uberhub_track
 from src.url_fetcher import lookup_problem_by_url, match_known_problem_by_text
 from src.vision_extract import extract_problems_from_image
-from src.web_ui import HTML_PAGE
+from src.web_ui import HTML_PAGE, LOGIN_PAGE
 
 FEEDBACK_PATH = Path("data/feedback.jsonl")
 _RATE_WINDOW_SEC = 60.0
 _IP_HITS: dict[str, deque[float]] = defaultdict(deque)
+_SESSION_COOKIE = "uberhub_session"
+_SESSION_TTL_SEC = 60 * 60 * 24 * 7  # 7 dias
 
 app = FastAPI(
     title="Calibrador de Questoes - UberHub Code Club",
@@ -32,17 +36,48 @@ app = FastAPI(
 )
 
 
+def _get_access_password() -> str:
+    return os.getenv("ACCESS_PASSWORD", "").strip()
+
+
+def _sign_session(password: str, issued_at: int) -> str:
+    secret = hashlib.sha256(f"uberhub-calibrador:{password}".encode()).digest()
+    msg = str(issued_at).encode()
+    sig = hmac.new(secret, msg, hashlib.sha256).hexdigest()
+    return f"{issued_at}.{sig}"
+
+
+def _is_authenticated(request: Request) -> bool:
+    password = _get_access_password()
+    if not password:
+        return True
+    token = request.cookies.get(_SESSION_COOKIE, "")
+    if "." not in token:
+        return False
+    ts_str, sig = token.split(".", 1)
+    if not ts_str.isdigit():
+        return False
+    issued_at = int(ts_str)
+    if time.time() - issued_at > _SESSION_TTL_SEC:
+        return False
+    expected = _sign_session(password, issued_at)
+    return hmac.compare_digest(token, expected)
+
+
 @app.middleware("http")
 async def security_and_rate_limit_middleware(request: Request, call_next: object) -> object:
-    """Aplica headers de seguranca e rate limit leve por IP nos endpoints /api/*."""
-    if request.url.path.startswith("/api/"):
-        limit = int(os.getenv("RATE_LIMIT_PER_MIN", "60"))
+    """Aplica headers de seguranca, autenticacao opcional e rate limit leve por IP."""
+    path = request.url.path
+    if path.startswith("/api/"):
+        default_limit = "10" if path == "/api/login" else os.getenv("RATE_LIMIT_PER_MIN", "60")
+        limit = int(default_limit)
         if limit > 0:
             client_ip = request.headers.get("x-forwarded-for", "").split(",")[0].strip() or (
                 request.client.host if request.client else "unknown"
             )
+            bucket_key = f"{client_ip}:login" if path == "/api/login" else client_ip
             now = time.monotonic()
-            hits = _IP_HITS[client_ip]
+            hits = _IP_HITS[bucket_key]
             while hits and now - hits[0] > _RATE_WINDOW_SEC:
                 hits.popleft()
             if len(hits) >= limit:
@@ -52,12 +87,24 @@ async def security_and_rate_limit_middleware(request: Request, call_next: object
                 )
             hits.append(now)
 
+        if path not in {"/api/login", "/api/logout"} and not _is_authenticated(request):
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Acesso restrito a instrutores e monitores. Faca login."},
+            )
+
     response = await call_next(request)
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
     return response
+
+
+class LoginRequest(BaseModel):
+    """Payload JSON para login de instrutores e monitores."""
+
+    password: str = Field(..., min_length=1, max_length=200)
 
 
 class TextPredictRequest(BaseModel):
@@ -90,9 +137,40 @@ class BatchAnalyzeRequest(BaseModel):
 
 
 @app.get("/", response_class=HTMLResponse)
-def index() -> str:
-    """Serve a interface web principal."""
-    return HTML_PAGE
+def index(request: Request) -> str:
+    """Serve a interface web principal (ou tela de login se ACCESS_PASSWORD estiver ativa)."""
+    if not _is_authenticated(request):
+        return LOGIN_PAGE
+    auth_active = bool(_get_access_password())
+    return HTML_PAGE.replace("__AUTH_LOGOUT_CLASS__", "" if auth_active else "hidden")
+
+
+@app.post("/api/login")
+def api_login(payload: LoginRequest) -> JSONResponse:
+    """Valida a senha compartilhada de instrutores/monitores e cria cookie assinado."""
+    expected = _get_access_password()
+    if not expected:
+        return JSONResponse({"status": "ok"})
+    if not hmac.compare_digest(payload.password, expected):
+        raise HTTPException(status_code=401, detail="Senha incorreta.")
+    token = _sign_session(expected, int(time.time()))
+    resp = JSONResponse({"status": "ok"})
+    resp.set_cookie(
+        key=_SESSION_COOKIE,
+        value=token,
+        max_age=_SESSION_TTL_SEC,
+        httponly=True,
+        samesite="lax",
+    )
+    return resp
+
+
+@app.post("/api/logout")
+def api_logout() -> JSONResponse:
+    """Encerra a sessao atual."""
+    resp = JSONResponse({"status": "logged_out"})
+    resp.delete_cookie(key=_SESSION_COOKIE)
+    return resp
 
 
 @app.get("/health")

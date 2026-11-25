@@ -1,5 +1,130 @@
 """Interface web moderna e simplificada para instrutores e monitores."""
 
+LOGIN_PAGE = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acesso Restrito — UberHub Calibrador</title>
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --surface: #ffffff;
+      --border: #dcd8ce;
+      --text: #14181f;
+      --muted: #4b5563;
+      --primary: #0f4c81;
+      --primary-hover: #0b3a63;
+      --danger: #b91c1c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      box-shadow: 0 2px 8px rgba(20, 24, 31, 0.06);
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: #e8f1f8;
+      border: 1px solid #bfd7ec;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+    h1 { font-size: 1.35rem; margin: 0 0 0.35rem; font-weight: 800; }
+    p { margin: 0 0 1.25rem; color: var(--muted); font-size: 0.9375rem; }
+    label { display: block; font-size: 0.8125rem; font-weight: 600; margin-bottom: 0.35rem; }
+    input[type="password"] {
+      width: 100%;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 16px;
+      margin-bottom: 0.9rem;
+    }
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.12);
+    }
+    button {
+      width: 100%;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.78rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:hover { background: var(--primary-hover); }
+    button:disabled { opacity: 0.6; cursor: wait; }
+    .err {
+      margin-top: 0.85rem;
+      color: var(--danger);
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <form class="login-card" onsubmit="doLogin(event)">
+    <span class="tag">UberHub Code Club</span>
+    <h1>Acesso para Instrutores</h1>
+    <p>Digite a senha da equipe para acessar o Calibrador de Questões.</p>
+    <label for="pwd">Senha de acesso</label>
+    <input type="password" id="pwd" required autocomplete="current-password" placeholder="••••••••" />
+    <button type="submit" id="login-btn">Entrar</button>
+    <div class="err" id="login-err"></div>
+  </form>
+  <script>
+    async function doLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('login-btn');
+      const err = document.getElementById('login-err');
+      err.style.display = 'none';
+      btn.disabled = true;
+      try {
+        const resp = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: document.getElementById('pwd').value }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.detail || 'Senha inválida');
+        window.location.reload();
+      } catch (ex) {
+        err.textContent = ex.message;
+        err.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
+"""
+
 HTML_PAGE = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -480,10 +605,13 @@ HTML_PAGE = """<!DOCTYPE html>
         <h1 class="wordmark">Calibrador de Questões</h1>
         <span class="pill-tag">UberHub Code Club</span>
       </div>
-      <label class="toggle-wrap">
-        <input type="checkbox" id="tech-toggle" onchange="toggleTechMode()" />
-        <span>Modo técnico</span>
-      </label>
+      <div style="display:flex;align-items:center;gap:0.5rem;flex-shrink:0">
+        <label class="toggle-wrap">
+          <input type="checkbox" id="tech-toggle" onchange="toggleTechMode()" />
+          <span>Modo técnico</span>
+        </label>
+        <button type="button" class="btn-secondary __AUTH_LOGOUT_CLASS__" onclick="doLogout()">Sair</button>
+      </div>
     </header>
 
     <div class="grid">
@@ -683,6 +811,11 @@ HTML_PAGE = """<!DOCTYPE html>
     function toggleTechMode() {
       const show = document.getElementById('tech-toggle').checked;
       document.querySelectorAll('.tech-details').forEach(el => el.classList.toggle('hidden', !show));
+    }
+
+    async function doLogout() {
+      await fetch('/api/logout', { method: 'POST' });
+      window.location.reload();
     }
 
     function handleImageFile(file) {

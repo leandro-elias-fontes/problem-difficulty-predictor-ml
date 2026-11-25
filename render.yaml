@@ -10,6 +10,9 @@ services:
         value: "1"
       - key: ENABLE_LOCAL_LLM
         value: "0"
+      # Opcional: defina uma senha para restringir o acesso apenas aos instrutores e monitores
+      # - key: ACCESS_PASSWORD
+      #   sync: false
       # Opcional (100% gratuito): adicione no painel do Render se quiser raciocinio via Groq ou OpenRouter
       # - key: GROQ_API_KEY
       #   sync: false

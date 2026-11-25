@@ -337,3 +337,49 @@ def test_security_headers_ssrf_and_rate_limit(monkeypatch: pytest.MonkeyPatch) -
     assert client.post("/api/feedback", json={"rating": 1200, "verdict": "ok"}).status_code == 200
     assert client.post("/api/feedback", json={"rating": 1200, "verdict": "ok"}).status_code == 429
     _IP_HITS.clear()
+
+
+def test_access_password_auth(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Valida protecao por senha compartilhada (ACCESS_PASSWORD) e sessao por cookie."""
+    from fastapi.testclient import TestClient
+
+    from src.app import _IP_HITS, app
+
+    _IP_HITS.clear()
+    monkeypatch.setenv("ACCESS_PASSWORD", "uberhub-segredo")
+    client = TestClient(app)
+
+    # Healthcheck continua publico para o Render
+    assert client.get("/health").status_code == 200
+
+    # Pagina principal exibe tela de login e API bloqueia com 401
+    login_html = client.get("/")
+    assert login_html.status_code == 200
+    assert "Acesso para Instrutores" in login_html.text
+    assert (
+        client.post("/api/predict-text", json={"statement": "Soma de dois inteiros."}).status_code
+        == 401
+    )
+
+    # Senha errada retorna 401
+    assert client.post("/api/login", json={"password": "errada"}).status_code == 401
+
+    # Senha certa libera sessao
+    ok_resp = client.post("/api/login", json={"password": "uberhub-segredo"})
+    assert ok_resp.status_code == 200
+    assert "uberhub_session" in client.cookies
+
+    home = client.get("/")
+    assert "Calibrador de Questões" in home.text
+    assert (
+        client.post("/api/predict-text", json={"statement": "Soma de dois inteiros."}).status_code
+        == 200
+    )
+
+    # Logout encerra sessao
+    assert client.post("/api/logout").status_code == 200
+    assert (
+        client.post("/api/predict-text", json={"statement": "Soma de dois inteiros."}).status_code
+        == 401
+    )
+    _IP_HITS.clear()

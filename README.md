@@ -16,6 +16,7 @@ Classificador profissional de dificuldade e tópicos para auxiliar instrutores e
 
 | Variável | Padrão | Descrição |
 | --- | --- | --- |
+| `ACCESS_PASSWORD` | *(vazio)* | Opcional: senha compartilhada para restringir o acesso a instrutores e monitores (exibe tela de login). |
 | `PORT` | `7860` | Porta HTTP injetada pelo Render/Docker. |
 | `LOW_MEMORY_MODE` | `0` (`1` no Render) | Usa apenas modelos leves (< 512 MB RAM), sem carregar `MiniLM`. |
 | `ENABLE_LOCAL_LLM` | `1` (`0` no Render) | Habilita/desabilita LLM GGUF local quando `local-llm` está instalado. |
