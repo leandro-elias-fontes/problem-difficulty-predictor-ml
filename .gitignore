@@ -7,10 +7,15 @@ __pycache__/
 .ruff_cache/
 artifacts/*
 !artifacts/semantic/
+!artifacts/*.joblib
+!artifacts/*.pt
+!artifacts/*.json
 *.pt
+!artifacts/*.pt
 !artifacts/semantic/*.pt
 *.pkl
 *.joblib
+!artifacts/*.joblib
 !artifacts/semantic/*.joblib
 submission.csv
 data/feedback.jsonl

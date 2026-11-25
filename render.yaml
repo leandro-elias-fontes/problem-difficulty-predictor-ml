@@ -5,3 +5,13 @@ services:
     plan: free
     healthCheckPath: /health
     autoDeploy: true
+    envVars:
+      - key: LOW_MEMORY_MODE
+        value: "1"
+      - key: ENABLE_LOCAL_LLM
+        value: "0"
+      # Opcional (100% gratuito): adicione no painel do Render se quiser raciocinio via Groq ou OpenRouter
+      # - key: GROQ_API_KEY
+      #   sync: false
+      # - key: OPENROUTER_API_KEY
+      #   sync: false

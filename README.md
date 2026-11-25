@@ -1,25 +1,19 @@
----
-title: Calibrador de Questoes - UberHub Code Club
-emoji: 🎯
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_port: 7860
----
-
 # Calibrador de Questões — UberHub Code Club
 
 Classificador profissional de dificuldade e tópicos para auxiliar instrutores e monitores na montagem de listas e provas (NEPS, Beecrowd, Codeforces e AtCoder).
 
 ## Recursos Principais
 
-- **Coach IA Local Open-Source (`Qwen2.5-Coder-3B-Instruct` GGUF)**: roda 100% dentro do próprio Docker via `llama-cpp-python` (zero API key, zero custo), raciocinando sobre algoritmo esperado, complexidade de tempo (`O(N log N)`) e dica pedagógica para monitoria.
-- **Modelo Semântico Multilíngue (PT-BR + EN)**: treinado com **8.619 problemas reais** usando `paraphrase-multilingual-MiniLM-L12-v2`, classificador multi-label de **18 tópicos**, ensemble (`XGBoost` + `Ridge` + `PyTorch MLP`) e busca **k-NN** das 3 questões reais mais parecidas do Codeforces.
+- **Modo Render Free (< 512 MB RAM)** + **IA Híbrida Gratuita**: usa `XGBoost + PyTorch MLP` treinados em **8.619 problemas reais** localmente, com suporte opcional a provedores gratuitos via variáveis de ambiente (`GROQ_API_KEY` ou `OPENROUTER_API_KEY`) e fallback automático para execução local (sem nunca expor chaves ao navegador).
 - **4 Modos de Uso na Interface Web**:
   - **Texto**: enunciado + presets de limite `N`.
   - **Link**: consulta rating e tags oficiais direto nas APIs públicas do Codeforces e AtCoder, além de leitura de nível no Beecrowd e NEPS.
   - **Lista (Lote)**: analisa até 15 questões de uma vez, ordena de A até O e gera alertas pedagógicos de saltos bruscos de dificuldade.
   - **Print (`Ctrl+V`)**: OCR 100% offline via RapidOCR, com identificação automática de questões conhecidas pelo título/ID e edição de texto extraído.
+
+## Deploy Gratuito no Render.com
+
+O repositório já inclui `Dockerfile` enxuto (< 512 MB RAM) e `render.yaml` (`runtime: docker`, `plan: free`, `healthCheckPath: /health`). Basta conectar o repositório no Render como **Web Service** (ou **Blueprint**).
 
 ## Executar Localmente
 

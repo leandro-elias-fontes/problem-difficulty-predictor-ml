@@ -1,0 +1,13 @@
+.git/
+.venv/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+tests/
+notebooks/
+assets/
+artifacts/semantic/
+data/real_problems.csv
+data/feedback.jsonl
+*.pyc
+.env

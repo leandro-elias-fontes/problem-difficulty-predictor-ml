@@ -289,9 +289,12 @@ def test_llm_coach_json_parsing_and_blend(monkeypatch: pytest.MonkeyPatch) -> No
     assert parsed["llm_rating"] == 1600
     assert parsed["algorithm"] == "Dijkstra"
 
-    monkeypatch.setattr("src.predict.analyze_with_local_llm", lambda **_: parsed)
+    monkeypatch.setattr(
+        "src.predict.analyze_with_local_llm",
+        lambda **_: {**parsed, "provider": "Qwen2.5-Coder-3B (Local)"},
+    )
     res = predict_rating("Um carteiro precisa ir da cidade 1 até N.", n_limit="10^5")
-    assert res["ai_engine"] == "Qwen2.5-Coder-3B (Local) + Ensemble"
+    assert "Qwen2.5-Coder-3B (Local)" in str(res["ai_engine"])
     assert res["algorithm"] == "Dijkstra"
     assert res["complexity"] == "O(M log N)"
     assert 800 <= int(res["rating"]) <= 3000
