@@ -248,3 +248,27 @@ def test_fastapi_web_endpoints(monkeypatch: pytest.MonkeyPatch) -> None:
     batch_data = batch_resp.json()
     assert batch_data["count"] == 2
     assert batch_data["items"][0]["rating"] <= batch_data["items"][1]["rating"]
+
+
+def test_match_known_problem_by_text(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Valida identificacao automatica de questao oficial por titulo ou ID no texto/OCR."""
+    from src.url_fetcher import match_known_problem_by_text
+
+    monkeypatch.setattr(
+        "src.url_fetcher._load_cf_catalog",
+        lambda: {
+            (4, "A"): {"name": "Watermelon", "rating": 800, "tags": ["brute force", "math"]},
+            (1850, "E"): {
+                "name": "Cardboard for Pictures",
+                "rating": 1100,
+                "tags": ["binary search"],
+            },
+        },
+    )
+    by_id = match_known_problem_by_text("1850E\nDetermine the value of w.")
+    assert by_id is not None
+    assert by_id["rating"] == 1100
+
+    by_title = match_known_problem_by_text("A. Watermelon\nOne hot summer day...")
+    assert by_title is not None
+    assert by_title["rating"] == 800

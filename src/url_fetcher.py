@@ -18,6 +18,8 @@ _ATCODER_URL_RE = re.compile(
     r"atcoder\.jp/contests/([^/]+)/tasks/([A-Za-z0-9_]+)",
     re.IGNORECASE,
 )
+_BEECROWD_URL_RE = re.compile(r"beecrowd\.com(?:\.br)?/.*?/problems/view/(\d+)", re.IGNORECASE)
+_NEPS_URL_RE = re.compile(r"neps\.academy/(?:br|en)/exercise/(\d+)", re.IGNORECASE)
 
 _CF_TAG_PT: dict[str, str] = {
     "dp": "Programação Dinâmica",
@@ -96,6 +98,68 @@ def _atcoder_diff_to_cf_scale(diff: float) -> int:
     mapped = 800.0 + max(diff, 0.0) * 0.75
     clamped = min(max(mapped, 800.0), 3000.0)
     return int(round(clamped / 50.0) * 50)
+
+
+def match_known_problem_by_text(text: str) -> dict[str, object] | None:
+    """Tenta identificar uma questao oficial do Codeforces pelo titulo/cabecalho no texto ou OCR."""
+    lines = [ln.strip() for ln in (text or "").splitlines() if ln.strip()]
+    if not lines:
+        return None
+
+    # Procura padroes como "A. Watermelon", "Problem B. Kuriyama Mirai", "1850E - Cardboard..."
+    first_chunk = " ".join(lines[:4])
+    cf_id_m = re.search(r"\b(\d{3,4})\s*([A-G][12]?)\b", first_chunk)
+    candidate_titles = [
+        re.sub(r"^(?:Problem\s+)?[A-G][12]?\s*[.:-]\s*", "", ln, flags=re.I).strip().lower()
+        for ln in lines[:4]
+    ]
+    candidate_titles = [t for t in candidate_titles if 4 <= len(t) <= 80]
+
+    try:
+        catalog = _load_cf_catalog()
+    except Exception:
+        return None
+
+    if cf_id_m:
+        cid, idx = int(cf_id_m.group(1)), cf_id_m.group(2).upper()
+        prob = catalog.get((cid, idx))
+        if prob and "rating" in prob:
+            rating = int(prob["rating"])
+            return {
+                "mode": "official",
+                "source": "Codeforces (identificado pelo texto/OCR)",
+                "title": f"CF {cid}{idx} - {prob.get('name', '')}".strip(),
+                "rating": rating,
+                "level": rating_to_level(rating),
+                "topics": _translate_tags([str(t) for t in prob.get("tags", [])]),
+                "confidence": "Oficial (Codeforces)",
+                "n_display": "Rating oficial",
+                "xgb_rating": float(rating),
+                "mlp_rating": float(rating),
+                "max_n_log10": 0.0,
+            }
+
+    if candidate_titles:
+        for (cid, idx), prob in catalog.items():
+            if "rating" not in prob:
+                continue
+            pname = str(prob.get("name") or "").strip().lower()
+            if pname and pname in candidate_titles:
+                rating = int(prob["rating"])
+                return {
+                    "mode": "official",
+                    "source": "Codeforces (identificado pelo título)",
+                    "title": f"CF {cid}{idx} - {prob.get('name', '')}".strip(),
+                    "rating": rating,
+                    "level": rating_to_level(rating),
+                    "topics": _translate_tags([str(t) for t in prob.get("tags", [])]),
+                    "confidence": "Oficial (Codeforces)",
+                    "n_display": "Rating oficial",
+                    "xgb_rating": float(rating),
+                    "mlp_rating": float(rating),
+                    "max_n_log10": 0.0,
+                }
+    return None
 
 
 def _strip_html_to_text(raw_html: str) -> str:
@@ -194,6 +258,53 @@ def lookup_problem_by_url(url: str) -> dict[str, object]:
             html.unescape(title_match.group(1)).strip() if title_match else "Questão via Link"
         )
         text = _strip_html_to_text(resp.text)
+
+        if _BEECROWD_URL_RE.search(clean_url):
+            lvl_m = re.search(r"N[ií]vel\s+(\d+)|Level\s+(\d+)", text, re.I)
+            if lvl_m:
+                bee_lvl = int(lvl_m.group(1) or lvl_m.group(2))
+                mapped = min(max(800 + (bee_lvl - 1) * 150, 800), 2300)
+                return {
+                    "mode": "official",
+                    "source": f"Beecrowd Nível {bee_lvl}",
+                    "title": page_title[:90],
+                    "rating": mapped,
+                    "level": rating_to_level(mapped),
+                    "topics": [f"Beecrowd Nível {bee_lvl}"],
+                    "confidence": "Oficial (Beecrowd)",
+                    "n_display": f"Nível {bee_lvl}/10",
+                    "xgb_rating": float(mapped),
+                    "mlp_rating": float(mapped),
+                    "max_n_log10": 0.0,
+                }
+
+        if _NEPS_URL_RE.search(clean_url):
+            neps_m = re.search(r"\b(Super\s+Dif[ií]cil|Dif[ií]cil|M[eé]dio|F[aá]cil)\b", text, re.I)
+            if neps_m:
+                diff_lbl = neps_m.group(1).lower()
+                neps_map = {
+                    "fácil": 900,
+                    "facil": 900,
+                    "médio": 1350,
+                    "medio": 1350,
+                    "difícil": 1750,
+                    "dificil": 1750,
+                }
+                mapped = neps_map.get(diff_lbl, 2100)
+                return {
+                    "mode": "official",
+                    "source": "NEPS Academy",
+                    "title": page_title[:90],
+                    "rating": mapped,
+                    "level": rating_to_level(mapped),
+                    "topics": [f"NEPS: {neps_m.group(1)}"],
+                    "confidence": "Oficial (NEPS)",
+                    "n_display": neps_m.group(1),
+                    "xgb_rating": float(mapped),
+                    "mlp_rating": float(mapped),
+                    "max_n_log10": 0.0,
+                }
+
         if len(text) < 40:
             raise ValueError(
                 "A pagina exige JavaScript ou login para exibir o enunciado. "

@@ -5,10 +5,13 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .ruff_cache/
-artifacts/
+artifacts/*
+!artifacts/semantic/
 *.pt
+!artifacts/semantic/*.pt
 *.pkl
 *.joblib
+!artifacts/semantic/*.joblib
 submission.csv
 data/feedback.jsonl
 .env

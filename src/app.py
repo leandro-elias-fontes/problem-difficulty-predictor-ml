@@ -13,7 +13,7 @@ from pydantic import BaseModel, Field
 
 from src.predict import predict_rating
 from src.semantic_model import rating_to_uberhub_track
-from src.url_fetcher import lookup_problem_by_url
+from src.url_fetcher import lookup_problem_by_url, match_known_problem_by_text
 from src.vision_extract import extract_problems_from_image
 from src.web_ui import HTML_PAGE
 
@@ -69,7 +69,17 @@ def health() -> dict[str, str]:
 
 @app.post("/api/predict-text")
 def api_predict_text(payload: TextPredictRequest) -> dict[str, object]:
-    """Estima o Rating a partir de texto e limites."""
+    """Estima o Rating a partir de texto e limites (ou identifica se for questao oficial)."""
+    official = match_known_problem_by_text(payload.statement)
+    if official is not None:
+        track_info = rating_to_uberhub_track(int(official["rating"]))
+        return {
+            **official,
+            "track": track_info["track"],
+            "slot": track_info["slot"],
+            "guidance": track_info["guidance"],
+            "similar_problems": [],
+        }
     return predict_rating(
         statement=payload.statement,
         n_limit=payload.n_limit,
@@ -221,11 +231,22 @@ async def api_predict_image(
 
     results: list[dict[str, object]] = []
     for prob in problems:
-        pred = predict_rating(
-            statement=prob.statement_text,
-            n_limit=n_limit,
-            time_limit=prob.time_limit,
-        )
+        official = match_known_problem_by_text(prob.statement_text)
+        if official is not None:
+            track_info = rating_to_uberhub_track(int(official["rating"]))
+            pred = {
+                **official,
+                "track": track_info["track"],
+                "slot": track_info["slot"],
+                "guidance": track_info["guidance"],
+                "similar_problems": [],
+            }
+        else:
+            pred = predict_rating(
+                statement=prob.statement_text,
+                n_limit=n_limit,
+                time_limit=prob.time_limit,
+            )
         results.append(
             {
                 "label": prob.label,
