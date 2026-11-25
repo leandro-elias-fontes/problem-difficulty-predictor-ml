@@ -1,30 +1,78 @@
 # Calibrador de Questões — Listas & Maratonas
 
-Classificador profissional de dificuldade e tópicos para auxiliar instrutores e monitores na montagem de listas e provas (NEPS, Beecrowd, Codeforces e AtCoder).
+Sistema completo em Python (FastAPI + Machine Learning + OCR offline) para estimar o **Rating** (escala 800–3000 estilo Codeforces), identificar **tópicos algorítmicos** e apoiar **instrutores e monitores** na montagem equilibrada de listas de treino e provas de programação competitiva (Codeforces, AtCoder, Beecrowd, NEPS Academy e OBI/SBC).
 
-## Recursos Principais
+---
 
-- **Modo Render Free (< 512 MB RAM)** + **IA Híbrida Gratuita**: usa `XGBoost + PyTorch MLP` treinados em **8.619 problemas reais** localmente, com cascata gratuita via variáveis de ambiente (`GROQ_API_KEY` → `OPENROUTER_API_KEY` → fallback local) sem expor chaves ao navegador ou a subprocessos.
-- **4 Modos de Uso na Interface Web**:
-  - **Texto**: enunciado + presets de limite `N`.
-  - **Link**: consulta rating e tags oficiais direto nas APIs públicas do Codeforces e AtCoder, além de leitura de nível no Beecrowd e NEPS (com proteção anti-SSRF).
-  - **Lista (Lote)**: analisa até 15 questões em sequência (sem timeout), ordena de A até O e gera alertas pedagógicos de saltos bruscos de dificuldade.
-  - **Print (`Ctrl+V`)**: OCR 100% offline via RapidOCR, com identificação automática de questões conhecidas pelo título/ID e edição de texto extraído.
-- **Segurança & Hardening**: headers HTTP de segurança (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`), rate limit por IP (`/api/*`), proteção anti-SSRF e limites máximos de payload.
+## Por que este projeto existe
+
+Ao montar listas de exercícios ou simulados de maratona, ler apenas a história do enunciado engana: um mesmo problema de grafos ou contagem muda completamente de complexidade e nível conforme as restrições (`N <= 20` aponta para backtracking/bitmask DP; `N <= 10^5` aponta para Dijkstra/DSU/SegTree; `N <= 10^{18}` aponta para exponenciação de matrizes ou matemática).
+
+Este projeto automatiza essa triagem combinando:
+1. **Consulta oficial automática** para plataformas públicas (Codeforces API, AtCoder Kenkoooo, Beecrowd e NEPS).
+2. **Pipeline de ML treinado em 8.619 problemas reais** (`XGBoost`, `PyTorch MLP`, `Ridge`, embeddings multilíngues PT-BR/EN e busca `k-NN` de questões parecidas).
+3. **Cascata opcional de Coach IA via API gratuita** (`GROQ_API_KEY` → `OPENROUTER_API_KEY` → fallback 100% local), retornando técnica esperada, complexidade assintótica e dica pedagógica para monitoria.
+
+---
+
+## Principais Recursos
+
+### 4 Modos de Análise na Interface Web
+- **Texto:** cole o enunciado (em português ou inglês) com atalhos rápidos para limites de `N` (`≤ 20`, `10³`, `10⁵`, `2·10⁵`, `10¹⁸`) e tempo limite.
+- **Link:** consulta rating e tags oficiais diretamente nas APIs públicas do Codeforces e AtCoder, além de leitura automática de nível no Beecrowd e NEPS Academy.
+- **Lista (Lote):** analisa até **15 links ou enunciados** em sequência com progresso ao vivo, ordena automaticamente de `A` até `O`, gera resumo copiável e emite **alertas pedagógicos** (ex.: saltos bruscos de dificuldade ≥ 400 pontos ou ausência de questão de aquecimento).
+- **Print (`Ctrl+V`):** arraste uma imagem ou cole um print direto da área de transferência. O **RapidOCR** extrai o texto 100% offline, identifica automaticamente se for uma questão conhecida pelo título/ID e permite editar o texto extraído e recalcular.
+
+### Segurança & Hardening
+- **Controle de acesso opcional por senha (`ACCESS_PASSWORD`):** exibe tela de login dedicada e protege todos os endpoints `/api/*` com cookie `HttpOnly` assinado via `HMAC-SHA256` (comparação em tempo constante) e proteção contra força bruta.
+- **Proteção anti-SSRF:** bloqueia `localhost`, domínios `.local`/`.internal` e qualquer IP privado/loopback/link-local/reservado na leitura de URLs externas, validando redirecionamentos salto a salto.
+- **Headers HTTP & Rate Limit:** aplica `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, limite de requisições por IP (`/api/*`) e validação de tamanho máximo nos payloads.
+
+---
+
+## Estrutura do Projeto
+
+- `src/app.py`: servidor FastAPI, middlewares de segurança/rate limit, autenticação por cookie assinado e rotas (`/`, `/health`, `/api/login`, `/api/logout`, `/api/predict-text`, `/api/predict-url`, `/api/predict-image`, `/api/analyze-batch`, `/api/feedback`).
+- `src/web_ui.py`: interface web responsiva (desktop e mobile) servida diretamente pelo FastAPI.
+- `src/features.py`: normalização Unicode PT-BR/EN, extração de `max_n_log10` (suporte a `10⁵`, `10^{18}`, `100.000`, ignorando módulos `10^9 + 7`), densidade matemática e 21 features estruturais/semânticas.
+- `src/dataset.py` & `src/fetch_real_data.py`: coleta e unificação da base real (`data/real_problems.csv` com 8.619 problemas: 8.319 do Codeforces + 300 curados em PT-BR).
+- `src/train.py`: treino e validação cruzada 5-Fold (`XGBRegressor` + `RatingMLP` em PyTorch) para o modo leve (`< 512 MB RAM`).
+- `src/semantic_model.py`: pipeline semântico multilíngue (`paraphrase-multilingual-MiniLM-L12-v2`, classificador multi-label de 18 tópicos, ensemble `XGBoost + Ridge + PyTorch MLP` e índice `k-NN`).
+- `src/llm_coach.py`: integração opcional com Groq / OpenRouter / GGUF local com fallback automático para o modelo local.
+- `src/url_fetcher.py`: clientes com cache e proteção anti-SSRF para Codeforces, AtCoder, Beecrowd, NEPS e páginas públicas.
+- `src/vision_extract.py`: OCR 100% offline com `rapidocr-onnxruntime` e separação automática de múltiplas questões.
+- `src/predict.py`: orquestração de inferência (CLI e API web) com cache de artefatos.
+- `tests/test_pipeline.py`: suíte `pytest` cobrindo regex, ausência de data leakage, PyTorch, OCR, endpoints FastAPI, anti-SSRF, rate limit e autenticação.
+
+---
+
+## Resultados Observados (5-Fold CV em 8.619 problemas reais)
+
+| Modo / Modelo | MAE | RMSE | R² | Uso de RAM |
+| --- | --- | --- | --- | --- |
+| Modo Leve — `XGBoost` (`artifacts/`) | 355.4 | 441.7 | 0.475 | < 512 MB |
+| Modo Leve — `PyTorch MLP` (`artifacts/`) | 375.2 | 486.4 | 0.364 | < 512 MB |
+| Modo Semântico — Ensemble (`MiniLM + XGB + Ridge + MLP`) | 359.3 | 448.7 | 0.458 | ~900 MB |
+
+---
 
 ## Variáveis de Ambiente
 
 | Variável | Padrão | Descrição |
 | --- | --- | --- |
-| `ACCESS_PASSWORD` | *(vazio)* | Opcional: senha compartilhada para restringir o acesso a instrutores e monitores (exibe tela de login). |
-| `PORT` | `7860` | Porta HTTP injetada pelo Render/Docker. |
-| `LOW_MEMORY_MODE` | `0` (`1` no Render) | Usa apenas modelos leves (< 512 MB RAM), sem carregar `MiniLM`. |
-| `ENABLE_LOCAL_LLM` | `1` (`0` no Render) | Habilita/desabilita LLM GGUF local quando `local-llm` está instalado. |
-| `GROQ_API_KEY` | *(vazio)* | Opcional (gratuita): habilita análise via Groq (`Llama 3.3 70B`). |
-| `OPENROUTER_API_KEY` | *(vazio)* | Opcional (gratuita): fallback após Groq via OpenRouter Free. |
+| `ACCESS_PASSWORD` | *(vazio)* | Opcional: senha compartilhada para restringir o acesso a instrutores e monitores. |
+| `PORT` | `7860` | Porta HTTP onde o servidor `uvicorn` escuta. |
+| `LOW_MEMORY_MODE` | `0` | `1` usa apenas os modelos leves (`XGBoost + MLP`), cabendo com folga em 512 MB de RAM. |
+| `ENABLE_LOCAL_LLM` | `1` | Habilita LLM GGUF local quando o extra `[local-llm]` está instalado. |
+| `GROQ_API_KEY` | *(vazio)* | Opcional: ativa Coach IA via Groq (`llama-3.3-70b-versatile`) com fallback local. |
+| `OPENROUTER_API_KEY` | *(vazio)* | Opcional: ativa fallback via OpenRouter (`llama-3.3-70b-instruct:free`). |
 | `RATE_LIMIT_PER_MIN` | `60` | Máximo de requisições `/api/*` por IP por minuto (`0` desativa). |
 
-## Executar Localmente
+---
+
+## Como Executar
+
+### 1. Localmente (Python)
 
 ```bash
 python -m venv .venv
@@ -36,13 +84,33 @@ uvicorn src.app:app --reload
 
 Acesse `http://127.0.0.1:8000`.
 
-## Deploy Gratuito no Render.com (Docker Free — 512 MB RAM)
+*(Opcional)* Para habilitar embeddings multilíngues (`MiniLM`) e LLM local (`llama-cpp-python`), instale o extra:
+```bash
+pip install -e ".[local-llm]"
+```
 
-1. Acesse [dashboard.render.com](https://dashboard.render.com) e clique em **New +** → **Blueprint** (ou **Web Service**).
-2. Conecte este repositório (`leandro-elias-fontes/problem-difficulty-predictor-ml`).
-3. O [render.yaml](render.yaml) já configura `runtime: docker`, `plan: free`, `healthCheckPath: /health`, `LOW_MEMORY_MODE=1` e `ENABLE_LOCAL_LLM=0`.
-4. *(Opcional)* Adicione `GROQ_API_KEY` ou `OPENROUTER_API_KEY` nas **Environment Variables** do Render para raciocínio gratuito em nuvem, ou deixe vazio para rodar 100% local.
-5. Clique em **Deploy** e acesse a URL pública gerada pelo Render.
+### 2. Via CLI
+
+```bash
+python -m src.predict \
+  --text "Dado um grafo conexo com n vértices e m arestas, encontre o menor caminho." \
+  --n-limit "2 * 10^5" \
+  --time-limit 2.0
+```
+
+Ou a partir de uma imagem (PNG/JPG/WEBP):
+```bash
+python -m src.predict --image caminho/da_questao.png
+```
+
+### 3. Via Docker
+
+```bash
+docker build -t calibrador-questoes .
+docker run -p 7860:7860 -e ACCESS_PASSWORD=sua_senha calibrador-questoes
+```
+
+---
 
 ## Qualidade e Testes
 
@@ -51,4 +119,3 @@ ruff check .
 ruff format --check .
 pytest -v
 ```
-
