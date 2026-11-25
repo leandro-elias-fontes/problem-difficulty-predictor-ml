@@ -68,7 +68,7 @@ def _translate_tags(tags: list[str]) -> list[str]:
 @lru_cache(maxsize=1)
 def _load_cf_catalog() -> dict[tuple[int, str], dict[str, object]]:
     """Carrega e mantem em cache o catalogo oficial da API do Codeforces."""
-    resp = httpx.get("https://codeforces.com/api/problemset.problems", timeout=15.0)
+    resp = httpx.get("https://codeforces.com/api/problemset.problems", timeout=4.5)
     resp.raise_for_status()
     payload = resp.json()
     if payload.get("status") != "OK":
@@ -104,17 +104,20 @@ def _atcoder_diff_to_cf_scale(diff: float) -> int:
 
 
 def match_known_problem_by_text(text: str) -> dict[str, object] | None:
-    """Tenta identificar uma questao oficial do Codeforces pelo titulo/cabecalho no texto ou OCR."""
+    """Identifica questao oficial do Codeforces apenas quando o texto traz ID ou cabecalho CF."""
     lines = [ln.strip() for ln in (text or "").splitlines() if ln.strip()]
     if not lines:
         return None
 
-    # Procura padroes como "A. Watermelon", "Problem B. Kuriyama Mirai", "1850E - Cardboard..."
-    first_chunk = " ".join(lines[:4])
-    cf_id_m = re.search(r"\b(\d{3,4})\s*([A-G][12]?)\b", first_chunk)
+    first_chunk = " ".join(lines[:3])
+    cf_id_m = re.match(r"^\s*(?:CF\s*)?(\d{3,4})\s*([A-G][12]?)\b", first_chunk, re.I)
+    header_m = re.match(r"^\s*(?:Problem\s+)?[A-G][12]?\s*[.:-]\s+[A-Z]", lines[0])
+    if not cf_id_m and not header_m:
+        return None
+
     candidate_titles = [
         re.sub(r"^(?:Problem\s+)?[A-G][12]?\s*[.:-]\s*", "", ln, flags=re.I).strip().lower()
-        for ln in lines[:4]
+        for ln in lines[:3]
     ]
     candidate_titles = [t for t in candidate_titles if 4 <= len(t) <= 80]
 

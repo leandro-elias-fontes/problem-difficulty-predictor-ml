@@ -871,6 +871,26 @@ HTML_PAGE = """<!DOCTYPE html>
         .replace(/"/g, '&quot;');
     }
 
+    async function safeJson(resp) {
+      const text = await resp.text();
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        throw new Error(`Resposta inesperada do servidor (HTTP ${resp.status}). Tente novamente em alguns segundos.`);
+      }
+    }
+
+    function showLoading(title, subtitle) {
+      const el = document.getElementById('results');
+      el.innerHTML = `
+        <div class="empty-state">
+          <div class="spinner"></div>
+          <strong>${escapeHtml(title)}</strong>
+          <p style="margin:0.35rem 0 0">${escapeHtml(subtitle)}</p>
+        </div>`;
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
     function renderItems(items) {
       lastItems = items;
       const showTech = document.getElementById('tech-toggle').checked;
@@ -1163,21 +1183,24 @@ HTML_PAGE = """<!DOCTYPE html>
         document.getElementById('results').innerHTML = '<div class="error-msg">Cole o link da questão antes de consultar.</div>';
         return;
       }
+      const prevText = btn.textContent;
       btn.disabled = true;
-      document.getElementById('results').innerHTML = '<div class="empty-state">Consultando questão...</div>';
+      btn.textContent = 'Consultando...';
+      showLoading('Consultando questão...', 'Buscando dados da plataforma e calibrando nível.');
       try {
         const resp = await fetch('/api/predict-url', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ url }),
         });
-        const data = await resp.json();
+        const data = await safeJson(resp);
         if (!resp.ok) throw new Error(data.detail || 'Erro ao consultar link');
         renderItems([data]);
       } catch (err) {
         document.getElementById('results').innerHTML = `<div class="error-msg">${escapeHtml(err.message)}</div>`;
       } finally {
         btn.disabled = false;
+        btn.textContent = prevText;
       }
     }
 
@@ -1209,13 +1232,10 @@ HTML_PAGE = """<!DOCTYPE html>
         document.getElementById('results').innerHTML = '<div class="error-msg">Cole ou digite o enunciado do problema antes de estimar.</div>';
         return;
       }
+      const prevText = btn.textContent;
       btn.disabled = true;
-      document.getElementById('results').innerHTML = `
-        <div class="empty-state">
-          <div class="spinner"></div>
-          <strong>Analisando com Coach IA Local...</strong>
-          <p style="margin:0.35rem 0 0">Lendo restrições e raciocinando sobre a complexidade (~10–20s).</p>
-        </div>`;
+      btn.textContent = 'Analisando...';
+      showLoading('Analisando questão...', 'Identificando tópicos, restrições e nível recomendado.');
       try {
         const timeLimit = parseFloat(document.getElementById('time-limit').value) || 2.0;
         const resp = await fetch('/api/predict-text', {
@@ -1227,7 +1247,7 @@ HTML_PAGE = """<!DOCTYPE html>
             time_limit: timeLimit,
           }),
         });
-        const data = await resp.json();
+        const data = await safeJson(resp);
         if (!resp.ok) throw new Error(data.detail || 'Erro na previsão');
         const title = document.getElementById('prob-title').value.trim();
         renderItems([{ ...data, title, time_limit: timeLimit }]);
@@ -1235,6 +1255,7 @@ HTML_PAGE = """<!DOCTYPE html>
         document.getElementById('results').innerHTML = `<div class="error-msg">${escapeHtml(err.message)}</div>`;
       } finally {
         btn.disabled = false;
+        btn.textContent = prevText;
       }
     }
 
@@ -1245,26 +1266,24 @@ HTML_PAGE = """<!DOCTYPE html>
         return;
       }
       const btn = document.getElementById('btn-image');
+      const prevText = btn.textContent;
       btn.disabled = true;
-      document.getElementById('results').innerHTML = `
-        <div class="empty-state">
-          <div class="spinner"></div>
-          <strong>Lendo print e analisando com IA Local...</strong>
-          <p style="margin:0.35rem 0 0">Extraindo texto offline (OCR) e calibrando dificuldade.</p>
-        </div>`;
+      btn.textContent = 'Lendo print...';
+      showLoading('Lendo print (OCR offline)...', 'Extraindo enunciado da imagem e calibrando dificuldade.');
       try {
         const form = new FormData();
         form.append('file', file, file.name || 'print.png');
         const nLim = document.getElementById('img-n-limit').value.trim();
         if (nLim) form.append('n_limit', nLim);
         const resp = await fetch('/api/predict-image', { method: 'POST', body: form });
-        const data = await resp.json();
+        const data = await safeJson(resp);
         if (!resp.ok) throw new Error(data.detail || 'Erro ao processar imagem');
         renderItems(data.results);
       } catch (err) {
         document.getElementById('results').innerHTML = `<div class="error-msg">${escapeHtml(err.message)}</div>`;
       } finally {
         btn.disabled = false;
+        btn.textContent = prevText;
       }
     }
   </script>

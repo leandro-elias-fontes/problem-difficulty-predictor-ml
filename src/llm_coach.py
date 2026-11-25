@@ -131,7 +131,7 @@ def _call_openai_compatible_api(
         "max_tokens": 220,
     }
     try:
-        resp = httpx.post(endpoint, headers=headers, json=payload, timeout=15.0)
+        resp = httpx.post(endpoint, headers=headers, json=payload, timeout=6.0)
         if resp.status_code != 200:
             return None
         content = resp.json()["choices"][0]["message"]["content"]
