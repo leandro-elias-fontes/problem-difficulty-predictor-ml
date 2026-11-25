@@ -100,7 +100,14 @@ HTML_PAGE = """<!DOCTYPE html>
       margin-bottom: 1rem;
       gap: 0.25rem;
     }
-    @media (max-width: 560px) { .segmented { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) {
+      .page { padding: 1rem 0.85rem 2.5rem; }
+      .card { padding: 1rem; }
+      h1 { font-size: 1.35rem; }
+      .segmented { grid-template-columns: 1fr 1fr; }
+      .row { grid-template-columns: 1fr; gap: 0; }
+      textarea, input[type="text"], input[type="number"] { font-size: 16px; }
+    }
     .seg-btn {
       border: none;
       background: transparent;
@@ -310,9 +317,10 @@ HTML_PAGE = """<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       gap: 0.5rem;
       font-size: 0.82rem;
-      padding: 0.25rem 0;
+      padding: 0.3rem 0;
       border-bottom: 1px solid #e2e8f0;
     }
     .similar-row:last-child { border-bottom: none; }
@@ -404,7 +412,8 @@ HTML_PAGE = """<!DOCTYPE html>
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.6rem;
       padding: 0.65rem 0.85rem;
       background: var(--surface-alt);
       border: 1px solid var(--border);
@@ -817,15 +826,23 @@ HTML_PAGE = """<!DOCTYPE html>
       if (!text) return;
       const item = lastItems[idx];
       const nLim = document.getElementById('img-n-limit').value.trim() || null;
-      const resp = await fetch('/api/predict-text', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ statement: text, n_limit: nLim, time_limit: item.time_limit || 2.0 }),
-      });
-      const data = await resp.json();
-      if (resp.ok) {
+      document.getElementById('results').innerHTML = `
+        <div class="empty-state">
+          <div class="spinner"></div>
+          <strong>Recalculando com texto corrigido...</strong>
+        </div>`;
+      try {
+        const resp = await fetch('/api/predict-text', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ statement: text, n_limit: nLim, time_limit: item.time_limit || 2.0 }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.detail || 'Erro ao recalcular');
         lastItems[idx] = { ...data, label: item.label, title: item.title, time_limit: item.time_limit, ocr_text: text };
         renderItems(lastItems);
+      } catch (err) {
+        document.getElementById('results').innerHTML = `<div class="error-msg">${escapeHtml(err.message)}</div>`;
       }
     }
 
@@ -895,45 +912,93 @@ HTML_PAGE = """<!DOCTYPE html>
         const topics = (q.topics || []).slice(0, 2).join(', ');
         lines.push(`${letter}. ${q.title} — ${q.level} (~${q.rating}) [${topics}]`);
       });
-      await navigator.clipboard.writeText(lines.join('\\n'));
+      const text = lines.join('\\n');
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
       const btn = document.getElementById('copy-list-btn');
       const prev = btn.textContent;
       btn.textContent = 'Copiado!';
       setTimeout(() => { btn.textContent = prev; }, 1500);
     }
 
+    function computeContestAlerts(items) {
+      const alerts = [];
+      for (let i = 0; i < items.length - 1; i++) {
+        const r1 = items[i].rating;
+        const r2 = items[i + 1].rating;
+        if (r2 - r1 >= 400) {
+          const l1 = String.fromCharCode(65 + (i % 26));
+          const l2 = String.fromCharCode(65 + ((i + 1) % 26));
+          const mid = Math.round(((r1 + r2) / 2) / 50) * 50;
+          alerts.push(`Salto brusco entre ${l1} (${r1}) e ${l2} (${r2}): considere incluir uma questão intermediária (~${mid}).`);
+        }
+      }
+      if (items.length >= 3 && items[0].rating >= 1400) {
+        alerts.push('A lista não tem questão de aquecimento (800–1100). Considere adicionar uma questão A mais acessível.');
+      }
+      return alerts;
+    }
+
     async function analyzeBatch() {
       const btn = document.getElementById('btn-batch');
       const raw = document.getElementById('batch-input').value;
-      const lines = raw.split(/\\r?\\n/).map(s => s.trim()).filter(Boolean);
+      const lines = raw.split(/\\r?\\n/).map(s => s.trim()).filter(Boolean).slice(0, 15);
       if (!lines.length) {
         document.getElementById('results').innerHTML = '<div class="error-msg">Cole ao menos 1 link ou enunciado (1 por linha).</div>';
         return;
       }
       btn.disabled = true;
-      document.getElementById('results').innerHTML = `
-        <div class="empty-state">
-          <div class="spinner"></div>
-          <strong>Analisando ${lines.length} questões da lista...</strong>
-          <p style="margin:0.35rem 0 0">Pode deixar carregando e voltar em instantes — questões inéditas passam pela IA local.</p>
-        </div>`;
+      const items = [];
+      const errors = [];
       try {
-        const resp = await fetch('/api/analyze-batch', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items: lines.slice(0, 15) }),
-        });
-        const data = await resp.json();
-        if (!resp.ok) throw new Error(data.detail || 'Erro na análise em lote');
-        contestList = data.items.map(it => ({
+        for (let i = 0; i < lines.length; i++) {
+          const entry = lines[i];
+          document.getElementById('results').innerHTML = `
+            <div class="empty-state">
+              <div class="spinner"></div>
+              <strong>Analisando questão ${i + 1} de ${lines.length}...</strong>
+              <p style="margin:0.35rem 0 0">Pode deixar carregando — cada questão é processada sem risco de timeout.</p>
+            </div>`;
+          try {
+            const isUrl = /^https?:\\/\\//i.test(entry);
+            const resp = await fetch(isUrl ? '/api/predict-url' : '/api/predict-text', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(isUrl ? { url: entry } : { statement: entry }),
+            });
+            const data = await resp.json();
+            if (!resp.ok) throw new Error(data.detail || 'Erro no item');
+            const fallbackTitle = entry.length > 65 ? entry.slice(0, 65) + '...' : entry;
+            items.push({ ...data, title: data.title || fallbackTitle });
+          } catch (itemErr) {
+            errors.push(`Item ${i + 1}: ${itemErr.message}`);
+          }
+        }
+        if (!items.length) {
+          throw new Error('Nenhuma questão válida foi analisada. ' + errors.slice(0, 2).join(' | '));
+        }
+        items.sort((a, b) => a.rating - b.rating);
+        contestList = items.map(it => ({
           title: it.title || 'Questão',
           rating: it.rating,
           level: it.level,
           topics: it.topics || [],
           n_display: it.n_display || '',
         }));
-        renderContestList(data.alerts || []);
-        renderItems(data.items.slice(0, 3));
+        const alerts = computeContestAlerts(items);
+        if (errors.length) {
+          alerts.push(`${errors.length} item(ns) não puderam ser lidos: ${errors[0]}`);
+        }
+        renderContestList(alerts);
+        renderItems(items.slice(0, 3));
         document.getElementById('contest-card').scrollIntoView({ behavior: 'smooth' });
       } catch (err) {
         document.getElementById('results').innerHTML = `<div class="error-msg">${escapeHtml(err.message)}</div>`;

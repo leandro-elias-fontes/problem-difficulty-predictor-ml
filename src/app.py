@@ -11,6 +11,7 @@ from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
+from src.dataset import clean_text
 from src.predict import predict_rating
 from src.semantic_model import rating_to_uberhub_track
 from src.url_fetcher import lookup_problem_by_url, match_known_problem_by_text
@@ -70,7 +71,13 @@ def health() -> dict[str, str]:
 @app.post("/api/predict-text")
 def api_predict_text(payload: TextPredictRequest) -> dict[str, object]:
     """Estima o Rating a partir de texto e limites (ou identifica se for questao oficial)."""
-    official = match_known_problem_by_text(payload.statement)
+    cleaned = clean_text(payload.statement)
+    if len(cleaned) < 3:
+        raise HTTPException(
+            status_code=400,
+            detail="Informe um enunciado valido (pelo menos 3 caracteres).",
+        )
+    official = match_known_problem_by_text(cleaned)
     if official is not None:
         track_info = rating_to_uberhub_track(int(official["rating"]))
         return {
@@ -81,7 +88,7 @@ def api_predict_text(payload: TextPredictRequest) -> dict[str, object]:
             "similar_problems": [],
         }
     return predict_rating(
-        statement=payload.statement,
+        statement=cleaned,
         n_limit=payload.n_limit,
         time_limit=payload.time_limit,
     )
@@ -217,7 +224,7 @@ async def api_predict_image(
             tmp_path = Path(tmp.name)
 
         problems = extract_problems_from_image(tmp_path)
-    except ValueError as exc:
+    except (ValueError, OSError) as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     finally:
         if tmp_path is not None and tmp_path.exists():
